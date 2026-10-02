@@ -62,6 +62,10 @@
   #truck { width: 104px; }
   #bike { width: 56px; }
   #heli { width: 104px; }
+  #pickup { width: 84px; }
+  #bus { width: 104px; }
+  #tank { width: 96px; }
+  #plane { width: 100px; }
   #grenade { width: 24px; }
   #tnt { width: 32px; }
   #nuke { width: 66px; }
@@ -107,6 +111,61 @@
     will-change: transform;
   }
 
+  #mgun { width: 62px; }
+  #minigun { width: 72px; }
+  #rocket { width: 70px; }
+  #laser { width: 58px; }
+  #flamer { width: 62px; }
+  #taser { width: 38px; }
+  #saber { width: 13px; }
+  #hammer { width: 24px; }
+  #crowbar { width: 14px; }
+  #chainsaw { width: 22px; }
+  #molotov { width: 20px; }
+  #mine { width: 36px; }
+  #helmet { width: 34px; }
+  #vest { width: 30px; }
+  #block { width: 40px; }
+  #plank { width: 72px; }
+  .tools {
+    position: absolute;
+    top: 8px; right: 8px;
+    z-index: 2;
+    display: flex;
+    gap: 6px;
+  }
+  .tools button {
+    padding: 5px 10px;
+    border-radius: 8px;
+    border: 2px solid var(--edge);
+    background: var(--box);
+    color: CanvasText;
+    font: 13px system-ui, sans-serif;
+    cursor: pointer;
+  }
+  .tools button[aria-pressed="true"] { background: var(--side); color: var(--on-side); }
+  .menu {
+    position: fixed;
+    z-index: 20;
+    padding: 4px;
+    border-radius: 8px;
+    border: 2px solid var(--edge);
+    background: var(--box);
+  }
+  .menu button {
+    display: block;
+    width: 100%;
+    padding: 6px 10px;
+    border: 0;
+    border-radius: 5px;
+    background: none;
+    color: CanvasText;
+    font: 14px system-ui, sans-serif;
+    text-align: left;
+    cursor: pointer;
+  }
+  .menu button:hover { background: var(--bg); }
+
   @media (max-width: 640px) {
     .game { grid-template-columns: minmax(0, 1fr); }
     .sidebar { padding: 8px 16px; flex-direction: row; gap: 24px; }
@@ -145,6 +204,66 @@
         <path d="M10 30 L5 46 L4 62 M36 30 L41 46 L42 62" stroke="#e0a878" stroke-width="7"/>
         <circle cx="23" cy="12" r="10" fill="#e0a878"/>
         <path d="M13 12 A10 10 0 0 1 33 12 Z" fill="#3a2a1e"/>
+        <circle cx="19.5" cy="15.5" r="1.6" fill="#1d1a19"/>
+        <circle cx="26.5" cy="15.5" r="1.6" fill="#1d1a19"/>
+      </svg>
+    </button>
+    <button id="melon" class="person" type="button" aria-label="Melon. Drag into the box, or press Enter to drop from the top.">
+      <svg viewBox="0 -8 46 112" fill="none" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M17 62 L16 82 L15 99 M29 62 L30 82 L31 99" stroke="#3c8a34" stroke-width="9"/>
+        <path d="M23 20 V30" stroke="#5dbb4a" stroke-width="6"/>
+        <path d="M13 30 H33 L30 60 H16 Z" fill="#5dbb4a" stroke="#5dbb4a" stroke-width="8"/>
+        <path d="M10 30 L5 46 L4 62 M36 30 L41 46 L42 62" stroke="#5dbb4a" stroke-width="7"/>
+        <circle cx="23" cy="12" r="10" fill="#5dbb4a"/>
+        <path d="M17 4 V11 M23 2 V10 M29 4 V11" stroke="#2f7a3a" stroke-width="2"/>
+        <circle cx="19.5" cy="15.5" r="1.6" fill="#1d1a19"/>
+        <circle cx="26.5" cy="15.5" r="1.6" fill="#1d1a19"/>
+      </svg>
+    </button>
+    <button id="pumpkin" class="person" type="button" aria-label="Pumpkin. Drag into the box, or press Enter to drop from the top.">
+      <svg viewBox="0 -8 46 112" fill="none" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M17 62 L16 82 L15 99 M29 62 L30 82 L31 99" stroke="#c46a12" stroke-width="9"/>
+        <path d="M23 20 V30" stroke="#f08a24" stroke-width="6"/>
+        <path d="M13 30 H33 L30 60 H16 Z" fill="#f08a24" stroke="#f08a24" stroke-width="8"/>
+        <path d="M10 30 L5 46 L4 62 M36 30 L41 46 L42 62" stroke="#f08a24" stroke-width="7"/>
+        <circle cx="23" cy="12" r="10" fill="#f08a24"/>
+        <rect x="21" y="-3" width="4" height="6" fill="#7a4a22"/><path d="M18 3 Q16 8 18 12 M28 3 Q30 8 28 12" stroke="#c46a12" stroke-width="1.5"/>
+        <circle cx="19.5" cy="15.5" r="1.6" fill="#1d1a19"/>
+        <circle cx="26.5" cy="15.5" r="1.6" fill="#1d1a19"/>
+      </svg>
+    </button>
+    <button id="corn" class="person" type="button" aria-label="Corn. Drag into the box, or press Enter to drop from the top.">
+      <svg viewBox="0 -8 46 112" fill="none" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M17 62 L16 82 L15 99 M29 62 L30 82 L31 99" stroke="#5a9a3a" stroke-width="9"/>
+        <path d="M23 20 V30" stroke="#f2d13c" stroke-width="6"/>
+        <path d="M13 30 H33 L30 60 H16 Z" fill="#f2d13c" stroke="#f2d13c" stroke-width="8"/>
+        <path d="M10 30 L5 46 L4 62 M36 30 L41 46 L42 62" stroke="#f2d13c" stroke-width="7"/>
+        <circle cx="23" cy="12" r="10" fill="#f2d13c"/>
+        <circle cx="18" cy="7" r="1.3" fill="#d9a520"/><circle cx="23" cy="5" r="1.3" fill="#d9a520"/><circle cx="28" cy="7" r="1.3" fill="#d9a520"/>
+        <circle cx="19.5" cy="15.5" r="1.6" fill="#1d1a19"/>
+        <circle cx="26.5" cy="15.5" r="1.6" fill="#1d1a19"/>
+      </svg>
+    </button>
+    <button id="apple" class="person" type="button" aria-label="Apple. Drag into the box, or press Enter to drop from the top.">
+      <svg viewBox="0 -8 46 112" fill="none" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M17 62 L16 82 L15 99 M29 62 L30 82 L31 99" stroke="#a82828" stroke-width="9"/>
+        <path d="M23 20 V30" stroke="#d93a3a" stroke-width="6"/>
+        <path d="M13 30 H33 L30 60 H16 Z" fill="#d93a3a" stroke="#d93a3a" stroke-width="8"/>
+        <path d="M10 30 L5 46 L4 62 M36 30 L41 46 L42 62" stroke="#d93a3a" stroke-width="7"/>
+        <circle cx="23" cy="12" r="10" fill="#d93a3a"/>
+        <path d="M23 3 L24 -3" stroke="#7a4a22" stroke-width="2"/><ellipse cx="28" cy="-2" rx="4" ry="2" fill="#3fa66b"/>
+        <circle cx="19.5" cy="15.5" r="1.6" fill="#1d1a19"/>
+        <circle cx="26.5" cy="15.5" r="1.6" fill="#1d1a19"/>
+      </svg>
+    </button>
+    <button id="robot" class="person" type="button" aria-label="Robot. Drag into the box, or press Enter to drop from the top.">
+      <svg viewBox="0 -8 46 112" fill="none" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M17 62 L16 82 L15 99 M29 62 L30 82 L31 99" stroke="#6f7885" stroke-width="9"/>
+        <path d="M23 20 V30" stroke="#9aa3b2" stroke-width="6"/>
+        <path d="M13 30 H33 L30 60 H16 Z" fill="#9aa3b2" stroke="#9aa3b2" stroke-width="8"/>
+        <path d="M10 30 L5 46 L4 62 M36 30 L41 46 L42 62" stroke="#9aa3b2" stroke-width="7"/>
+        <circle cx="23" cy="12" r="10" fill="#9aa3b2"/>
+        <path d="M23 3 V-4" stroke="#3a404c" stroke-width="2"/><circle cx="23" cy="-5" r="2" fill="#ff3b30"/>
         <circle cx="19.5" cy="15.5" r="1.6" fill="#1d1a19"/>
         <circle cx="26.5" cy="15.5" r="1.6" fill="#1d1a19"/>
       </svg>
@@ -245,6 +364,71 @@
         <rect x="32" y="2" width="18" height="4" rx="2" fill="#3a404c"/>
       </svg>
     </button>
+    <button id="mgun" class="person sword" type="button" aria-label="Machine gun. Drag into the box, then tap it to start or stop firing.">
+      <svg viewBox="0 0 70 26" aria-hidden="true">
+        <path d="M2 6 H18 V15 L4 21 Z" fill="#7a4a22"/>
+        <path d="M19 13 H27 L25 24 H19 Z" fill="#3a404c"/>
+        <rect x="16" y="6" width="52" height="8" rx="2" fill="#5d6470"/>
+      </svg>
+    </button>
+    <button id="minigun" class="person sword" type="button" aria-label="Minigun. Drag into the box, then tap it to start or stop firing.">
+      <svg viewBox="0 0 80 26" aria-hidden="true">
+        <path d="M2 6 H18 V15 L4 21 Z" fill="#7a4a22"/>
+        <path d="M19 13 H27 L25 24 H19 Z" fill="#3a404c"/>
+        <rect x="16" y="6" width="62" height="8" rx="2" fill="#4a5160"/><rect x="40" y="3" width="38" height="3" fill="#4a5160"/><rect x="40" y="14" width="38" height="3" fill="#4a5160"/>
+      </svg>
+    </button>
+    <button id="rocket" class="person sword" type="button" aria-label="Rocket launcher. Drag into the box, then tap it to fire a rocket.">
+      <svg viewBox="0 0 78 26" aria-hidden="true">
+        <path d="M2 6 H18 V15 L4 21 Z" fill="#7a4a22"/>
+        <path d="M19 13 H27 L25 24 H19 Z" fill="#3a404c"/>
+        <rect x="16" y="6" width="60" height="8" rx="2" fill="#4f6b3a"/><path d="M76 4 V16 L70 10 Z" fill="#d9483b"/>
+      </svg>
+    </button>
+    <button id="laser" class="person sword" type="button" aria-label="Laser gun. Drag into the box, then tap it to fire. The beam goes through everyone and sets them alight.">
+      <svg viewBox="0 0 64 26" aria-hidden="true">
+        <path d="M2 6 H18 V15 L4 21 Z" fill="#7a4a22"/>
+        <path d="M19 13 H27 L25 24 H19 Z" fill="#3a404c"/>
+        <rect x="16" y="6" width="46" height="8" rx="2" fill="#c9ccd9"/><rect x="56" y="8" width="6" height="4" fill="#ff3b30"/>
+      </svg>
+    </button>
+    <button id="flamer" class="person sword" type="button" aria-label="Flamethrower. Drag into the box, then tap it to start or stop the flame.">
+      <svg viewBox="0 0 68 26" aria-hidden="true">
+        <path d="M2 6 H18 V15 L4 21 Z" fill="#7a4a22"/>
+        <path d="M19 13 H27 L25 24 H19 Z" fill="#3a404c"/>
+        <rect x="16" y="6" width="50" height="8" rx="2" fill="#d9483b"/><circle cx="34" cy="20" r="5" fill="#e3a02f"/>
+      </svg>
+    </button>
+    <button id="taser" class="person sword" type="button" aria-label="Taser. Drag into the box, then tap it to shock whoever it points at.">
+      <svg viewBox="0 0 40 28" aria-hidden="true">
+        <path d="M4 10 H14 L12 27 H3 Z" fill="#3a404c"/>
+        <rect x="2" y="3" width="34" height="9" rx="2" fill="#e3c02f"/>
+        <path d="M36 5 H39 M36 10 H39" stroke="#5ad1e6" stroke-width="2"/>
+      </svg>
+    </button>
+    <button id="saber" class="person sword" type="button" aria-label="Energy blade. Drag into the box, or press Enter to drop from the top.">
+      <svg viewBox="0 0 16 100" aria-hidden="true">
+        <rect x="5" y="1" width="6" height="18" rx="2" fill="#5d6470"/>
+        <rect x="5.5" y="19" width="5" height="80" rx="2.5" fill="#4ad8ff"/>
+      </svg>
+    </button>
+    <button id="hammer" class="person sword" type="button" aria-label="Hammer. Drag into the box, or press Enter to drop from the top.">
+      <svg viewBox="0 0 26 80" aria-hidden="true">
+        <rect x="10.5" y="1" width="5" height="64" fill="#7a4a22"/>
+        <rect x="2" y="62" width="22" height="16" rx="2" fill="#8a94a8"/>
+      </svg>
+    </button>
+    <button id="crowbar" class="person sword" type="button" aria-label="Crowbar. Drag into the box, or press Enter to drop from the top.">
+      <svg viewBox="0 0 16 76" aria-hidden="true">
+        <path d="M6 2 V70 Q6 74 12 72" fill="none" stroke="#4a5160" stroke-width="4" stroke-linecap="round"/>
+      </svg>
+    </button>
+    <button id="chainsaw" class="person sword" type="button" aria-label="Chainsaw. Drag into the box. It cuts whatever it touches.">
+      <svg viewBox="0 0 22 86" aria-hidden="true">
+        <rect x="2" y="1" width="18" height="28" rx="3" fill="#e3722f"/>
+        <rect x="6" y="27" width="10" height="58" rx="5" fill="#b9c1cd" stroke="#3a404c" stroke-width="2" stroke-dasharray="3 2"/>
+      </svg>
+    </button>
     <button id="car" class="person sword" type="button" aria-label="Car. Drag into the box, then tap it to start or stop the engine.">
       <svg viewBox="0 0 96 50" aria-hidden="true">
         <path d="M24 19 L30 3 H62 L72 19 Z" fill="#d9483b"/>
@@ -271,6 +455,41 @@
         <path d="M12 24 L24 12 H40 L48 24 M40 12 L44 4 M20 9 H30" stroke="#3fa66b" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
       </svg>
     </button>
+    <button id="pickup" class="person sword" type="button" aria-label="Pickup. Drag into the box, then tap it to start or stop the engine.">
+      <svg viewBox="0 0 110 52" aria-hidden="true">
+        <rect x="50" y="6" width="34" height="20" rx="3" fill="#5a6b94"/>
+        <rect x="56" y="10" width="22" height="12" fill="#bfe3f2"/>
+        <rect x="2" y="24" width="106" height="18" rx="3" fill="#5a6b94"/>
+        <circle cx="24" cy="42" r="9" fill="#22262e"/><circle cx="24" cy="42" r="3.5" fill="#9aa3b2"/>
+        <circle cx="86" cy="42" r="9" fill="#22262e"/><circle cx="86" cy="42" r="3.5" fill="#9aa3b2"/>
+      </svg>
+    </button>
+    <button id="bus" class="person sword" type="button" aria-label="Bus. Drag into the box, then tap it to start or stop the engine.">
+      <svg viewBox="0 0 170 70" aria-hidden="true">
+        <rect x="2" y="4" width="166" height="50" rx="5" fill="#e3b02f"/>
+        <path d="M10 12 h20 v16 h-20 Z M36 12 h20 v16 h-20 Z M62 12 h20 v16 h-20 Z M88 12 h20 v16 h-20 Z M114 12 h20 v16 h-20 Z M140 12 h20 v16 h-20 Z" fill="#bfe3f2"/>
+        <circle cx="34" cy="58" r="11" fill="#22262e"/><circle cx="34" cy="58" r="4.5" fill="#9aa3b2"/>
+        <circle cx="136" cy="58" r="11" fill="#22262e"/><circle cx="136" cy="58" r="4.5" fill="#9aa3b2"/>
+      </svg>
+    </button>
+    <button id="tank" class="person sword" type="button" aria-label="Tank. Slow, and it crushes whatever it runs into. Drag into the box, then tap it to start or stop the engine.">
+      <svg viewBox="0 0 130 60" aria-hidden="true">
+        <rect x="84" y="9" width="44" height="6" fill="#3a404c"/>
+        <rect x="40" y="4" width="44" height="18" rx="3" fill="#5f7a44"/>
+        <rect x="8" y="20" width="114" height="18" rx="3" fill="#5f7a44"/>
+        <rect x="2" y="36" width="126" height="22" rx="11" fill="#22262e"/>
+        <circle cx="20" cy="47" r="6" fill="#9aa3b2"/><circle cx="50" cy="47" r="6" fill="#9aa3b2"/><circle cx="80" cy="47" r="6" fill="#9aa3b2"/><circle cx="110" cy="47" r="6" fill="#9aa3b2"/>
+      </svg>
+    </button>
+    <button id="plane" class="person sword" type="button" aria-label="Plane. Drag into the box and it flies around; tap it to stop or start the engine.">
+      <svg viewBox="0 0 120 40" aria-hidden="true">
+        <path d="M6 22 L4 2 L22 18 Z" fill="#c9ccd9"/>
+        <ellipse cx="60" cy="22" rx="54" ry="12" fill="#c9ccd9"/>
+        <rect x="44" y="21" width="34" height="6" rx="3" fill="#8a94a8"/>
+        <ellipse cx="92" cy="18" rx="10" ry="6" fill="#bfe3f2"/>
+        <rect x="114" y="4" width="3" height="36" fill="#22262e"/>
+      </svg>
+    </button>
     <button id="heli" class="person sword" type="button" aria-label="Helicopter. Drag into the box and it flies around; tap it to stop or start the engine.">
       <svg viewBox="0 0 114 54" fill="none" aria-hidden="true">
         <path d="M18 5 H112 M76 5 V15" stroke="#22262e" stroke-width="3" stroke-linecap="round"/>
@@ -295,11 +514,34 @@
         <rect x="2" y="22" width="26" height="2" fill="#22262e"/>
       </svg>
     </button>
+    <button id="molotov" class="person sword" type="button" aria-label="Molotov. Drag into the box, then tap it to light it. It bursts into flames.">
+      <svg viewBox="0 0 20 34" aria-hidden="true">
+        <path d="M10 8 Q8 3 12 1" stroke="#ff9b2f" stroke-width="3" fill="none"/>
+        <rect x="7" y="7" width="6" height="8" fill="#cfd6e0"/>
+        <rect x="3" y="14" width="14" height="19" rx="4" fill="#7a4a22"/>
+      </svg>
+    </button>
+    <button id="mine" class="person sword" type="button" aria-label="Mine. Drag into the box, then tap it to arm it. It goes off when anyone touches it.">
+      <svg viewBox="0 0 34 18" aria-hidden="true">
+        <ellipse cx="17" cy="11" rx="16" ry="6" fill="#3a404c"/>
+        <rect x="13" y="2" width="8" height="5" rx="2" fill="#d9483b"/>
+      </svg>
+    </button>
     <button id="nuke" class="person sword" type="button" aria-label="Nuke. Drag into the box, then tap it to light the fuse. Destroys everything.">
       <svg viewBox="0 0 70 40" aria-hidden="true">
         <path d="M2 4 L20 20 L2 36 Z" fill="#5d6470"/>
         <ellipse cx="40" cy="20" rx="28" ry="18" fill="#5d6470"/>
         <circle cx="46" cy="20" r="8" fill="#ffd24a"/>
+      </svg>
+    </button>
+    <button id="block" class="person sword" type="button" aria-label="Block. Drag into the box; it stays where you put it.">
+      <svg viewBox="0 0 40 40" aria-hidden="true">
+        <rect x="1" y="1" width="38" height="38" fill="#8a94a8" stroke="#5d6470" stroke-width="2"/>
+      </svg>
+    </button>
+    <button id="plank" class="person sword" type="button" aria-label="Plank. Drag into the box; it stays where you put it.">
+      <svg viewBox="0 0 72 12" aria-hidden="true">
+        <rect x="1" y="1" width="70" height="10" fill="#a8743a" stroke="#7a4a22" stroke-width="2"/>
       </svg>
     </button>
     <button id="diluent" class="person sword" type="button" title="Joint diluent" aria-label="Joint diluent potion. Drop it on someone to make their joints slack.">
@@ -338,8 +580,52 @@
         <path d="M9 9 L3 26 Q2 31 7 31 H17 Q22 31 21 26 L15 9 Z" fill="#8a4fd3"/>
       </svg>
     </button>
+    <button id="acid" class="person sword" type="button" title="Acid" aria-label="Acid potion. Drop it on someone to dissolve them down to the skeleton.">
+      <svg viewBox="0 0 24 32" aria-hidden="true">
+        <rect x="9" y="2" width="6" height="8" fill="#cfd6e0"/><rect x="8" y="0" width="8" height="3" fill="#7a4a22"/>
+        <path d="M9 9 L3 26 Q2 31 7 31 H17 Q22 31 21 26 L15 9 Z" fill="#ff8a1f"/>
+      </svg>
+    </button>
+    <button id="immortal" class="person sword" type="button" title="Immortality" aria-label="Immortality potion. Drop it on someone living so nothing can hurt them; drop it again to take it away.">
+      <svg viewBox="0 0 24 32" aria-hidden="true">
+        <rect x="9" y="2" width="6" height="8" fill="#cfd6e0"/><rect x="8" y="0" width="8" height="3" fill="#7a4a22"/>
+        <path d="M9 9 L3 26 Q2 31 7 31 H17 Q22 31 21 26 L15 9 Z" fill="#f4f1ff"/>
+      </svg>
+    </button>
+    <button id="hard" class="person sword" type="button" title="Hard skin" aria-label="Hard skin potion. Drop it on someone to make them much tougher.">
+      <svg viewBox="0 0 24 32" aria-hidden="true">
+        <rect x="9" y="2" width="6" height="8" fill="#cfd6e0"/><rect x="8" y="0" width="8" height="3" fill="#7a4a22"/>
+        <path d="M9 9 L3 26 Q2 31 7 31 H17 Q22 31 21 26 L15 9 Z" fill="#8a94a8"/>
+      </svg>
+    </button>
+    <button id="gills" class="person sword" type="button" title="Underwater" aria-label="Underwater potion. Drop it on someone so they cannot drown.">
+      <svg viewBox="0 0 24 32" aria-hidden="true">
+        <rect x="9" y="2" width="6" height="8" fill="#cfd6e0"/><rect x="8" y="0" width="8" height="3" fill="#7a4a22"/>
+        <path d="M9 9 L3 26 Q2 31 7 31 H17 Q22 31 21 26 L15 9 Z" fill="#3d8fd1"/>
+      </svg>
+    </button>
+    <button id="shockproof" class="person sword" type="button" title="Electricity protection" aria-label="Electricity protection potion. Drop it on someone so shocks do nothing to them.">
+      <svg viewBox="0 0 24 32" aria-hidden="true">
+        <rect x="9" y="2" width="6" height="8" fill="#cfd6e0"/><rect x="8" y="0" width="8" height="3" fill="#7a4a22"/>
+        <path d="M9 9 L3 26 Q2 31 7 31 H17 Q22 31 21 26 L15 9 Z" fill="#3ad6c0"/>
+      </svg>
+    </button>
+    <button id="helmet" class="person sword" type="button" title="Helmet" aria-label="Helmet. Drop it on a person to protect their head.">
+      <svg viewBox="0 0 30 18" aria-hidden="true"><path d="M2 17 A13 14 0 0 1 28 17 Z" fill="#3a404c"/></svg>
+    </button>
+    <button id="vest" class="person sword" type="button" title="Armoured vest" aria-label="Armoured vest. Drop it on a person to protect their torso.">
+      <svg viewBox="0 0 28 32" aria-hidden="true"><path d="M3 1 H10 L14 6 L18 1 H25 L24 31 H4 Z" fill="#3a404c"/></svg>
+    </button>
   </aside>
-  <div id="box" class="box"><canvas id="canvas"></canvas></div>
+  <div id="box" class="box">
+    <canvas id="canvas"></canvas>
+    <div class="tools">
+      <button id="pause" type="button" aria-pressed="false">Pause</button>
+      <button id="speed" type="button">Speed 1&times;</button>
+      <button id="liquid" type="button">Liquid: none</button>
+      <button id="clear" type="button">Clear</button>
+    </div>
+  </div>
 </div>
 
 <script>
@@ -348,6 +634,7 @@
   var GRAVITY = 2200;    // px/s^2
   var BREAK = 950;       // body speed into a wall (px/s) that breaks bones: a drop of about 205px
   var KILL = 1400;       // body speed into a wall (px/s) that kills: a drop of about 445px
+  var SMASH = 2300;      // body speed into a wall (px/s) that destroys the body outright: only a full-speed slam
   var STAND = 0.06;      // how hard a healthy person pulls themselves upright each step
   var STAB = 500;        // point-first speed (px/s) a sword needs to go in
   var SLASH = 700;       // blade speed against a body part (px/s) at which it cuts
@@ -363,31 +650,69 @@
     bat: { len: 74, club: true },
     gun: { len: 30, gun: true },
     shotgun: { len: 46, gun: true, pellets: 6, spread: 0.32 },   // six pellets in a cone
-    rifle: { len: 62, gun: true, pierce: true }                  // goes through everyone in line
+    rifle: { len: 62, gun: true, pierce: true },                 // goes through everyone in line
+    // auto is the seconds between shots: a tap starts these firing and another stops them
+    mgun: { len: 56, gun: true, auto: 0.09, color: '#5d6470' },
+    minigun: { len: 66, gun: true, auto: 0.035, spread: 0.12, color: '#4a5160' },
+    rocket: { len: 64, gun: true, rocket: true, color: '#4f6b3a' },
+    laser: { len: 50, gun: true, pierce: true, laser: true, color: '#c9ccd9' },   // burns as well as wounds
+    flamer: { len: 54, gun: true, flame: true, auto: 0.016, color: '#d9483b' },
+    taser: { len: 28, gun: true, zap: true, color: '#e3c02f' },                   // shocks, no wound
+    saber: { len: 84, stab: true, cut: true, sever: 1, behead: 1, glow: '#4ad8ff' },
+    hammer: { len: 64, club: true, heavy: true },                 // one blow wrecks the part it lands on
+    crowbar: { len: 60, club: true },
+    chainsaw: { len: 70, cut: true, sever: 1, behead: 1, saw: true }   // cuts at a touch, no swing needed
   };
   var DEPTH = 26;        // how far past the joint a lodged blade sticks through
-  var MAX_SWORDS = 14;
+  var MAX_SWORDS = 18;
   // Vehicles are solid boxes w wide and h tall that never tip over. speed is px/s with the engine on.
   var VEHICLES = {
     car: { w: 96, h: 50, speed: 560, color: '#d9483b' },
     truck: { w: 150, h: 80, speed: 660, color: '#3d8fd1' },
     bike: { w: 60, h: 36, speed: 760, color: '#3fa66b' },
-    heli: { w: 110, h: 44, speed: 300, color: '#e3a02f', fly: true }   // starts with its engine on
+    heli: { w: 110, h: 44, speed: 300, color: '#e3a02f', fly: true },   // starts with its engine on
+    pickup: { w: 110, h: 52, speed: 600, color: '#5a6b94' },
+    bus: { w: 170, h: 70, speed: 500, color: '#e3b02f' },
+    tank: { w: 130, h: 60, speed: 260, color: '#5f7a44', crush: true },   // slow, but it flattens people
+    plane: { w: 120, h: 40, speed: 520, color: '#c9ccd9', fly: true }
   };
-  var MAX_VEHICLES = 6;
+  var MAX_VEHICLES = 8;
   // Bombs. r is the bomb's size, radius the blast reach, power the blast speed at the centre (px/s),
   // fuse the seconds from a tap to the blast, sever the chance each limb in the inner blast comes off.
   // The nuke reaches the whole box whatever its radius says.
   var BOMBS = {
     grenade: { r: 9, radius: 150, power: 1500, fuse: 2, sever: 0.3, color: '#4f6b3a' },
     tnt: { r: 13, radius: 260, power: 2400, fuse: 3, sever: 0.6, color: '#d9483b' },
-    nuke: { r: 20, radius: 0, power: 4500, fuse: 4, sever: 1, color: '#5d6470', nuke: true }
+    nuke: { r: 20, radius: 0, power: 4500, fuse: 4, sever: 1, color: '#5d6470', nuke: true },
+    molotov: { r: 9, radius: 120, power: 0, fuse: 1.5, sever: 0, color: '#7a4a22', fire: true },   // flames, no blast
+    mine: { r: 10, radius: 170, power: 1700, fuse: 0, sever: 0.5, color: '#3a404c', mine: true }   // armed by a tap, set off by touch
   };
   var MAX_BOMBS = 10;
   var VAPORIZE = 260;    // a nuke leaves nothing of anyone this close
   var RUN_BREAK = 350;   // vehicle speed into a body part (px/s) that breaks bones
   var RUN_KILL = 600;    // vehicle speed into the head or chest (px/s) that kills
   var MAX_THROW = 3200;
+  // Blocks are solid and stay wherever they are put; nothing moves them but you.
+  var BLOCKS = {
+    block: { w: 60, h: 60, color: '#8a94a8', edge: '#5d6470' },
+    plank: { w: 130, h: 20, color: '#a8743a', edge: '#7a4a22' }
+  };
+  var MAX_BLOCKS = 14, MAX_LINKS = 30;
+  var SPEEDS = [1, 0.5, 0.25];
+  var ROCKET = { radius: 170, power: 1700, sever: 0.4 };   // the blast of a rocket or tank shell
+  var WALK = 70;         // walking speed, px/s
+  // The box can be part-filled with a liquid. lift is how strongly it buoys bodies up against gravity.
+  var LIQUIDS = {
+    water: { c: 'rgba(61,143,209,0.35)', lift: 1.12 },    // puts fires out; they drown; carries shocks
+    acid: { c: 'rgba(150,220,60,0.45)', lift: 1 },        // dissolves anyone left in it
+    lava: { c: 'rgba(240,96,20,0.8)', lift: 0.9 }         // burns and kills fast
+  };
+  // The sitting pose: the same joints as SHAPE, on the ground with the legs out to the sides
+  var SIT = [
+    [0, -6, 10], [-10, 8, 8], [10, 8, 8], [0, 22, 11], [-7, 40, 8], [7, 40, 8],
+    [-15, 24, 5], [-17, 40, 5], [15, 24, 5], [17, 40, 5],
+    [-25, 34, 5], [-42, 43, 5], [25, 34, 5], [42, 43, 5]
+  ];
   var MAX_PEOPLE = 16;
   var STIFFNESS = 5;     // joint passes per step
   var GRAB = 24;         // how close the pointer must be to a joint to grab it
@@ -447,6 +772,13 @@
   }
   var SPECIES = {
     human: species(SHAPE, {}),
+    // Fruit people and the robot are built like humans: one colour all over, darker legs, and
+    // something on top of the head in place of hair.
+    melon: species(SHAPE, { skin: '#5dbb4a', dark: '#3c8a34', top: 'melon' }),
+    pumpkin: species(SHAPE, { skin: '#f08a24', dark: '#c46a12', top: 'pumpkin' }),
+    corn: species(SHAPE, { skin: '#f2d13c', dark: '#5a9a3a', top: 'corn' }),
+    apple: species(SHAPE, { skin: '#d93a3a', dark: '#a82828', top: 'apple' }),
+    robot: species(SHAPE, { skin: '#9aa3b2', dark: '#6f7885', top: 'robot', metal: true }),   // doesn't bleed
     dog: species(quad(1), { animal: true, scale: 1, fat: 13, tail: 14, body: '#d9a441', far: '#b5852f', snout: '#f3d9a0' }),
     pig: species(quad(1), { animal: true, scale: 1, fat: 22, tail: 6, body: '#f0a3b0', far: '#d98998', snout: '#f7c4cc' }),
     cow: species(quad(1.6), { animal: true, scale: 1.6, fat: 26, tail: 22, body: '#7a4b2e', far: '#5f3a23', snout: '#e8c9b0' })
@@ -460,6 +792,13 @@
   var W = 0, H = 0;
   var vehicles = [], bombs = [], booms = [], flash = 0;
   var bodies = [], swords = [], drops = [], shots = [];   // swords holds every weapon
+  var blocks = [], links = [];
+  var flames = [], rockets = [];
+  var liquid = null;     // 'water', 'acid' or 'lava' while the box is part-filled
+  var puddles = [];      // blood pooled where drips have landed: { x, y, w, age }
+  var tying = null;      // { kind, a } after "Tie ... from here", until the other end is chosen
+  var mouse = { x: 0, y: 0 };
+  var paused = false, speed = 1;
   var held = null;       // { body or sword, pt, tx, ty } while dragging inside the box
   var ghost = null;      // { el, samples } while dragging out of the sidebar
   var last = 0, acc = 0, clock = 0;
@@ -474,6 +813,15 @@
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
   }
 
+  // A body that is gone lets go of everything: the pointer, and any sword in it or in its hand
+  function forget(b) {
+    if (held && held.body === b) held = null;
+    swords.forEach(function (s) {
+      if (s.stuck && s.stuck.body === b) s.stuck = null;
+      if (s.grip && s.grip.body === b) s.grip = null;
+    });
+  }
+
   function addBody(kind, x, y, vx, vy) {
     var sp = SPECIES[kind];
     var flip = sp.animal && Math.random() < 0.5 ? -1 : 1;   // animals face either way
@@ -485,12 +833,16 @@
     });
     bodies.push({
       sp: sp, flip: flip,
-      pts: pts, cvx: vx, cvy: vy, skin: sp.animal ? sp.body : pick(SKIN), hair: pick(HAIR), shirt: pick(SHIRT),
+      pts: pts, cvx: vx, cvy: vy, skin: sp.animal ? sp.body : sp.skin || pick(SKIN), hair: pick(HAIR), shirt: sp.skin || pick(SHIRT),
+      pants: sp.dark || PANTS,
       state: 'ok',      // 'ok' can stand, 'broken' is alive but can't, 'dead' is limp for good
       ground: 0,        // seconds of footing left since last touching something to stand on
       standing: false,
       wounds: [],       // joints a sword has gone into
+      dmg: [],          // bruising of each joint, 0 to 1; it fades slowly while they live
+      spots: [],        // stab wounds anywhere on the body, each placed relative to two joints
       bleed: {},        // seconds each wound keeps bleeding, by joint
+      run: {},          // how far blood has run down from each wound, by joint
       blood: 100,       // drains while wounds bleed; too weak to stand below 35, dead at 0
       cutB: [],         // bones that have been cut through, by BONES index
       off: [],          // joints no longer attached to the body
@@ -498,9 +850,7 @@
       seen: {}          // when each part can next be cut, so one swing rolls the dice once
     });
     if (bodies.length > MAX_PEOPLE) {
-      var gone = bodies.shift();
-      if (held && held.body === gone) held = null;
-      swords.forEach(function (s) { if (s.stuck && s.stuck.body === gone) s.stuck = null; });
+      forget(bodies.shift());
     }
   }
 
@@ -539,7 +889,10 @@
 
   function stepVehicle(v) {
     var hw = v.w / 2, hh = v.h / 2, i, j;
-    if (held && held.vehicle === v) {
+    if (v.frozen) {
+      v.vx = v.vy = 0;
+      v.x = v.fx; v.y = v.fy;
+    } else if (held && held.vehicle === v) {
       v.vx = (held.tx - v.x) * 0.3 / STEP;
       v.vy = (held.ty - v.y) * 0.3 / STEP;
       var sp = Math.hypot(v.vx, v.vy);
@@ -600,6 +953,9 @@
           }
         }
         if (b.off[j]) continue;
+        if (b.hard) into /= 1.6;
+        if (v.k.crush) into *= 3;
+        if (into > 200) bruise(b, j, Math.min(0.6, into / 900));
         if (into > RUN_KILL && (j === HEAD || j === CH)) {
           if (b.state !== 'dead') wound(b, j, 12);
           kill(b);
@@ -610,7 +966,7 @@
     }
 
     // A spinning rotor cuts whatever reaches into it: fatal to the head or chest, a wound elsewhere
-    if (v.k.fly && v.on) {
+    if (v.kind === 'heli' && v.on) {
       var rx = v.x + v.dir * 19, ry = v.y - hh - 4;
       for (i = 0; i < bodies.length; i++) {
         var pts = bodies[i].pts;
@@ -618,7 +974,7 @@
           if (Math.abs(pts[j].x - rx) > 58 + pts[j].r || Math.abs(pts[j].y - ry) > 6 + pts[j].r) continue;
           if (!fresh(bodies[i], 'r' + j)) continue;
           wound(bodies[i], j, 14);
-          if (j === HEAD || j === CH) kill(bodies[i]);
+          vital(bodies[i], j);
         }
       }
     }
@@ -689,6 +1045,57 @@
       wheel(58, 67, 12);
       wheel(126, 67, 12);
       lamp = [146, 52];
+    } else if (v.kind === 'pickup') {
+      ctx.fillRect(50, 6, 34, 20);
+      ctx.fillRect(2, 24, 106, 18);
+      ctx.fillStyle = '#bfe3f2';
+      ctx.fillRect(56, 10, 22, 12);
+      wheel(24, 42, 9);
+      wheel(86, 42, 9);
+      lamp = [106, 30];
+    } else if (v.kind === 'bus') {
+      ctx.fillRect(2, 4, 166, 50);
+      ctx.fillStyle = '#bfe3f2';
+      for (var n = 0; n < 6; n++) ctx.fillRect(10 + n * 26, 12, 20, 16);
+      wheel(34, 58, 11);
+      wheel(136, 58, 11);
+      lamp = [166, 44];
+    } else if (v.kind === 'tank') {
+      ctx.fillRect(40, 4, 44, 18);                      // turret
+      ctx.fillRect(8, 20, 114, 18);                     // hull
+      ctx.fillStyle = '#3a404c';
+      ctx.fillRect(84, 9, 44, 6);                       // barrel
+      ctx.fillStyle = '#22262e';
+      ctx.fillRect(13, 36, 104, 22);                    // track
+      ctx.beginPath();
+      ctx.arc(13, 47, 11, 0, Math.PI * 2);
+      ctx.arc(117, 47, 11, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.fillStyle = '#9aa3b2';
+      for (n = 0; n < 4; n++) {
+        ctx.beginPath();
+        ctx.arc(20 + n * 30, 47, 6, 0, Math.PI * 2);
+        ctx.fill();
+      }
+      lamp = [120, 26];
+    } else if (v.kind === 'plane') {
+      ctx.beginPath();
+      ctx.moveTo(6, 22); ctx.lineTo(4, 2); ctx.lineTo(22, 18);   // tail fin
+      ctx.fill();
+      ctx.beginPath();
+      ctx.ellipse(60, 22, 54, 12, 0, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.fillStyle = '#8a94a8';
+      ctx.fillRect(44, 21, 34, 6);                      // wing
+      ctx.fillStyle = '#bfe3f2';
+      ctx.beginPath();
+      ctx.ellipse(92, 18, 10, 6, 0, 0, Math.PI * 2);
+      ctx.fill();
+      // the propeller flickers while it spins
+      var blade = v.on ? 4 + 14 * Math.abs(Math.cos(clock * 45)) : 18;
+      ctx.fillStyle = '#22262e';
+      ctx.fillRect(114, 22 - blade, 3, blade * 2);
+      lamp = null;
     } else if (v.kind === 'heli') {
       ctx.fillRect(4, 17, 52, 6);                       // tail boom
       ctx.beginPath();
@@ -752,6 +1159,16 @@
   function explode(m) {
     var k = m.k, R = k.nuke ? Math.hypot(W, H) : k.radius, i, j, d, f, dx, dy;
     m.gone = true;
+    if (k.fire) {
+      // a molotov throws no one about: it spreads burning fuel around where it broke
+      booms.push({ x: m.x, y: m.y, R: R * 0.6, age: 0, life: 0.3 });
+      for (i = 0; i < 40; i++) {
+        var fa = Math.random() * Math.PI * 2, fd = Math.random() * R;
+        flame(m.x + Math.cos(fa) * fd, m.y + Math.sin(fa) * fd * 0.6, (Math.random() - 0.5) * 60,
+          -Math.random() * 120, 0.8 + Math.random() * 0.8, true);
+      }
+      return;
+    }
     booms.push({ x: m.x, y: m.y, R: R, age: 0, life: k.nuke ? 1.3 : 0.45 });
 
     for (i = bodies.length - 1; i >= 0; i--) {
@@ -766,11 +1183,11 @@
         f = (1 - d / R) * k.power * STEP;
         p.px -= dx / d * f;
         p.py -= dy / d * f - f * 0.3;
+        if (!b.off[j]) bruise(b, j, (1 - d / R) * 0.9);
       }
       if (near >= R) continue;
-      if (k.nuke && near < VAPORIZE) {
-        if (held && held.body === b) held = null;
-        swords.forEach(function (s) { if (s.stuck && s.stuck.body === b) s.stuck = null; });
+      if (k.nuke && near < VAPORIZE && !b.immortal) {
+        forget(b);
         spray(b.pts[CH].x, b.pts[CH].y, 30, 2);
         bodies.splice(i, 1);
         continue;
@@ -792,9 +1209,10 @@
 
     if (k.nuke) {
       // nothing else survives it either
-      if (held && (held.vehicle || held.sword)) held = null;
+      if (held && (held.vehicle || held.sword || held.block)) held = null;
       vehicles.length = 0;
       swords.length = 0;
+      blocks.length = 0;
       flash = 1.6;
     } else {
       for (i = 0; i < vehicles.length; i++) {
@@ -823,11 +1241,26 @@
     }
   }
 
+  // Lighting a bomb starts its fuse, which can't be put out. A mine is armed instead.
+  function light(m) {
+    if (m.k.mine) { m.armed = true; m.armT = 1; }
+    else if (m.fuse === null) m.fuse = m.k.fuse;
+  }
+  function tripped(m) {
+    return vehicles.some(function (v) {
+      return Math.abs(v.x - m.x) < v.w / 2 + m.r + 3 && Math.abs(v.y - m.y) < v.h / 2 + m.r + 3;
+    }) || bodies.some(function (b) {
+      if (m.x < b.x0 - m.r - 3 || m.x > b.x1 + m.r + 3 || m.y < b.y0 - m.r - 3 || m.y > b.y1 + m.r + 3) return false;
+      return b.pts.some(function (p) { return Math.hypot(m.x - p.x, m.y - p.y) < m.r + p.r + 3; });
+    });
+  }
   function stepBombs() {
     var i, m;
     for (i = 0; i < bombs.length; i++) {
       m = bombs[i];
-      if (held && held.bomb === m) {
+      if (m.frozen) {
+        m.vx = m.vy = 0;
+      } else if (held && held.bomb === m) {
         m.vx = (held.tx - m.x) * 0.3 / STEP;
         m.vy = (held.ty - m.y) * 0.3 / STEP;
         var sp = Math.hypot(m.vx, m.vy);
@@ -844,6 +1277,11 @@
       if (m.fuse !== null) {
         m.fuse -= STEP;
         if (m.fuse <= 0) explode(m);
+      }
+      // an armed mine waits a second, then goes off under the first body or vehicle to touch it
+      if (m.armed && !m.gone) {
+        m.armT -= STEP;
+        if (m.armT <= 0 && tripped(m)) explode(m);
       }
     }
     for (i = bombs.length - 1; i >= 0; i--) {
@@ -879,6 +1317,12 @@
       ctx.beginPath();
       ctx.arc(m.x + r * 0.3, m.y, r * 0.4, 0, Math.PI * 2);
       ctx.fill();
+    } else if (m.kind === 'mine') {
+      ctx.ellipse(m.x, m.y + 4, r * 1.5, r * 0.6, 0, 0, Math.PI * 2);
+      ctx.fill();
+      // the button shows red once it is armed
+      ctx.fillStyle = m.armed ? '#ff3b30' : '#8a94a8';
+      ctx.fillRect(m.x - 4, m.y - 4, 8, 5);
     } else {
       ctx.arc(m.x, m.y, r, 0, Math.PI * 2);
       ctx.fill();
@@ -922,7 +1366,12 @@
     regrowth: '#57c46a',   // grows back severed limbs and heads
     virus: '#a4d122',      // turns them green, drains them slowly, spreads by touch
     revive: '#ffd24a',     // brings the dead back, if they still have a head
-    poison: '#8a4fd3'      // drains them fast
+    poison: '#8a4fd3',     // drains them fast
+    gills: '#3d8fd1',      // they can't drown
+    shockproof: '#3ad6c0', // shocks do nothing to them
+    acid: '#ff8a1f',       // eats the flesh away, leaving a dead skeleton
+    immortal: '#f4f1ff',   // nothing can hurt them; a second dose takes it away
+    hard: '#8a94a8'        // much tougher: harder to stab, cut, break and bruise
   };
   var VIRUS_SKIN = '#8fbf6a';
   var VIRUS_DRAIN = 3, POISON_DRAIN = 8;   // blood per second, out of 100
@@ -950,6 +1399,179 @@
     b.cutB = [];
     b.off = [];
   }
+  // Acid eats the flesh away and leaves a dead skeleton
+  function dissolve(b) {
+    if (b.immortal || b.bare) return;
+    b.bare = true;
+    kill(b);
+    b.wounds = [];
+    b.spots = [];
+    b.dmg = [];
+    b.bleed = {};
+    b.run = {};
+    b.fire = b.burn = 0;
+    b.helmet = b.vest = false;
+    b.pts.forEach(function (p) { spray(p.x, p.y, 3, 0.4, POTIONS.acid); });
+    // with no flesh to hold them, weapons fall out of it
+    swords.forEach(function (s) {
+      if (s.stuck && s.stuck.body === b) s.stuck = null;
+      if (s.grip && s.grip.body === b) s.grip = null;
+    });
+  }
+  // Fire. A burning body chars, loses blood and sets light to whoever it touches.
+  function ignite(b, secs) {
+    if (b.bare || b.sp.metal || (liquid === 'water' && b.under > 0)) return;
+    b.fire = Math.max(b.fire || 0, secs);
+  }
+  // One lick of flame. A hot one sets light to anyone it touches.
+  function flame(x, y, vx, vy, life, hot) {
+    flames.push({ x: x, y: y, vx: vx, vy: vy, age: 0, life: life, hot: hot });
+    if (flames.length > 350) flames.shift();
+  }
+  function stepFlames() {
+    for (var i = flames.length - 1; i >= 0; i--) {
+      var f = flames[i];
+      f.age += STEP;
+      f.vy -= 200 * STEP;   // flames rise
+      f.x += f.vx * STEP;
+      f.y += f.vy * STEP;
+      if (f.age >= f.life || (liquid === 'water' && f.y > surface())) { flames.splice(i, 1); continue; }
+      if (!f.hot) continue;
+      for (var n = 0; n < bodies.length; n++) {
+        var b = bodies[n];
+        if (f.x < b.x0 - 6 || f.x > b.x1 + 6 || f.y < b.y0 - 6 || f.y > b.y1 + 6) continue;
+        for (var j = 0; j < b.pts.length; j++) {
+          if (Math.hypot(f.x - b.pts[j].x, f.y - b.pts[j].y) < b.pts[j].r + 5) { ignite(b, 8); break; }
+        }
+      }
+    }
+  }
+  function drawFlames() {
+    for (var i = 0; i < flames.length; i++) {
+      var f = flames[i], t = f.age / f.life;
+      ctx.globalAlpha = 1 - t;
+      ctx.fillStyle = t < 0.35 ? '#ffe9a8' : t < 0.7 ? '#ff9b2f' : '#d9483b';
+      ctx.beginPath();
+      ctx.arc(f.x, f.y, (3 + 4 * t) * (f.hot ? 1.3 : 1), 0, Math.PI * 2);
+      ctx.fill();
+    }
+    ctx.globalAlpha = 1;
+  }
+  // Electricity. A shocked body convulses and can't stand. It kills robots outright, and in
+  // water it carries to everyone else in the water and kills them too.
+  var zapping = false;
+  function shock(b, secs) {
+    if (b.shockproof || b.bare) return;
+    b.shock = Math.max(b.shock || 0, secs);
+    if (b.sp.metal) kill(b);
+    if (liquid !== 'water' || !(b.under > 0) || zapping) return;
+    zapping = true;
+    bodies.forEach(function (o) {
+      if (o.under > 0 && !o.shockproof) { shock(o, secs); kill(o); }
+    });
+    zapping = false;
+  }
+  // Armour: a helmet covers the head, a vest the chest, shoulders and hips. Blades, bullets
+  // and blows to a covered part do nothing; crashes, blasts and fire still get through.
+  function armoured(b, j) {
+    return (j === HEAD && b.helmet) || (b.vest && j >= SL && j <= HR);
+  }
+
+  // Liquid fills the bottom of the box up to this height
+  function surface() { return H * 0.6; }
+  function stepLiquid() {
+    var i, j, top = surface(), q = LIQUIDS[liquid], p;
+    for (i = 0; i < bodies.length; i++) bodies[i].under = 0;
+    if (!liquid) return;
+    for (i = 0; i < bodies.length; i++) {
+      var b = bodies[i], alive = b.state !== 'dead';
+      for (j = 0; j < b.pts.length; j++) {
+        p = b.pts[j];
+        if (p.y < top) continue;
+        b.under++;
+        // it drags on whatever is in it, and buoys it up
+        p.px = p.x - (p.x - p.px) * 0.94;
+        p.py = p.y - (p.y - p.py) * 0.94 + GRAVITY * STEP * STEP * q.lift;
+      }
+      var ducked = b.pts[HEAD].y > top && !b.off[HEAD];
+      if (liquid === 'water') {
+        if (b.under) b.fire = 0;
+        // about ten seconds of air with the head under
+        if (ducked && alive && !b.gills && !b.sp.metal && !b.immortal) {
+          b.air = (b.air === undefined ? 10 : b.air) - STEP;
+          if (b.air <= 0) kill(b);
+        } else b.air = 10;
+      } else if (liquid === 'acid') {
+        b.soak = b.under ? (b.soak || 0) + STEP : 0;
+        if (b.soak > 1.5) dissolve(b);
+      } else if (b.under) {
+        ignite(b, 6);
+        b.burn = Math.min(1, (b.burn || 0) + 0.5 * STEP);
+        if (alive && !b.immortal && !b.bare) b.blood -= 25 * STEP;
+      }
+    }
+    for (i = 0; i < swords.length; i++) {
+      for (j = 0; j < 2; j++) {
+        p = j ? swords[i].b : swords[i].a;
+        if (p.y < top) continue;
+        p.px = p.x - (p.x - p.px) * 0.96;
+        p.py = p.y - (p.y - p.py) * 0.96;
+      }
+    }
+    for (i = 0; i < vehicles.length + bombs.length; i++) {
+      var o = i < vehicles.length ? vehicles[i] : bombs[i - vehicles.length];
+      if (o.y < top) continue;
+      o.vx *= 0.97; o.vy *= 0.95;
+      // lava sets bombs off
+      if (liquid === 'lava' && o.fuse === null && !o.k.mine) o.fuse = 0.5;
+    }
+  }
+  function drawLiquid() {
+    if (!liquid) return;
+    var top = surface();
+    ctx.fillStyle = LIQUIDS[liquid].c;
+    ctx.fillRect(0, top, W, H - top);
+    ctx.fillRect(0, top, W, 3);
+  }
+
+  // Rockets fly straight and go off on whatever they hit
+  function launch(x, y, ang) {
+    rockets.push({ x: x, y: y, vx: Math.cos(ang) * 950, vy: Math.sin(ang) * 950, age: 0 });
+  }
+  function stepRockets() {
+    for (var i = rockets.length - 1; i >= 0; i--) {
+      var r = rockets[i];
+      r.age += STEP;
+      r.x += r.vx * STEP;
+      r.y += r.vy * STEP;
+      if (Math.random() < 0.5) flame(r.x, r.y, -r.vx * 0.1, -r.vy * 0.1, 0.3);
+      var hit = r.x < 4 || r.x > W - 4 || r.y < 4 || r.y > H - 4 || blockAt(r);
+      // it has to clear whoever fired it before it can go off against a body or vehicle
+      if (!hit && r.age > 0.08) {
+        hit = vehicleAt(r) || bodies.some(function (b) {
+          if (r.x < b.x0 - 4 || r.x > b.x1 + 4 || r.y < b.y0 - 4 || r.y > b.y1 + 4) return false;
+          return b.pts.some(function (p) { return Math.hypot(r.x - p.x, r.y - p.y) < p.r + 4; });
+        });
+      }
+      if (!hit) continue;
+      rockets.splice(i, 1);
+      explode({ k: ROCKET, x: r.x, y: r.y });
+    }
+  }
+  function drawRockets() {
+    for (var i = 0; i < rockets.length; i++) {
+      var r = rockets[i];
+      ctx.save();
+      ctx.translate(r.x, r.y);
+      ctx.rotate(Math.atan2(r.vy, r.vx));
+      ctx.fillStyle = '#5d6470';
+      ctx.fillRect(-9, -2.5, 14, 5);
+      ctx.fillStyle = '#d9483b';
+      ctx.fillRect(5, -2.5, 4, 5);
+      ctx.restore();
+    }
+  }
+
   function applyPotion(kind, x, y) {
     spray(x, y, 14, 0.6, POTIONS[kind]);
     var hit = jointAt({ x: x, y: y });
@@ -959,9 +1581,13 @@
       b.loose = true;
     } else if (kind === 'regen') {
       b.wounds = [];
+      b.dmg = [];
+      b.spots = [];
       b.bleed = {};
+      b.run = {};
       b.limp = [];
       b.loose = b.virus = b.poison = false;
+      b.fire = b.burn = b.shock = 0;
       if (b.state !== 'dead') {
         b.blood = 100;
         b.state = legless(b) ? 'broken' : 'ok';
@@ -973,7 +1599,15 @@
       infect(b);
     } else if (kind === 'poison') {
       b.poison = true;
-    } else if (kind === 'revive' && b.state === 'dead' && !b.off[HEAD]) {
+    } else if (kind === 'acid') {
+      dissolve(b);
+    } else if (kind === 'gills' || kind === 'shockproof') {
+      b[kind] = true;
+    } else if (kind === 'immortal') {
+      if (b.state !== 'dead') b.immortal = !b.immortal;
+    } else if (kind === 'hard') {
+      b.hard = true;
+    } else if (kind === 'revive' && b.state === 'dead' && !b.off[HEAD] && !b.bare) {
       b.state = legless(b) ? 'broken' : 'ok';
       b.blood = 60;
       b.bleed = {};
@@ -982,7 +1616,45 @@
     }
   }
 
+  // Per-part damage. Every hard knock bruises the joint it lands on, and the bruise shows on the
+  // skin. A joint bruised all the way gives out: an arm goes limp, a leg stops holding them up.
+  function bruise(b, j, amt) {
+    if (b.immortal || b.bare) return;
+    if (b.hard) amt *= 0.4;
+    b.dmg[j] = Math.min(1.5, (b.dmg[j] || 0) + amt);
+    if (b.dmg[j] < 1 || b.off[j]) return;
+    if (j >= KL) { if (b.state === 'ok') b.state = 'broken'; }
+    else if (j >= EL) limpArm(b, j < ER ? EL : ER);
+  }
+  // A joint stopped dead by something solid at speed v (px/s)
+  function thud(b, j, v) {
+    if (v > 500) bruise(b, j, Math.min(0.4, (v - 500) / 1500));
+  }
+  function drawBruises(b) {
+    ctx.fillStyle = '#6b1f3a';
+    for (var j = 0; j < b.pts.length; j++) {
+      var d = b.dmg[j] || 0;
+      if (d < 0.05) continue;
+      ctx.globalAlpha = Math.min(0.6, d * 0.6);
+      ctx.beginPath();
+      ctx.arc(b.pts[j].x, b.pts[j].y, b.pts[j].r * 0.8, 0, Math.PI * 2);
+      ctx.fill();
+    }
+    // burns char the whole body
+    if (b.burn > 0.05) {
+      ctx.fillStyle = '#1d1a19';
+      ctx.globalAlpha = b.burn * 0.55;
+      for (j = 0; j < b.pts.length; j++) {
+        ctx.beginPath();
+        ctx.arc(b.pts[j].x, b.pts[j].y, b.pts[j].r * 0.9, 0, Math.PI * 2);
+        ctx.fill();
+      }
+    }
+    ctx.globalAlpha = 1;
+  }
+
   function kill(b) {
+    if (b.immortal) return;
     if (!b.skin0) b.skin0 = b.skin;
     b.state = 'dead';
     b.skin = '#a9aaa3';
@@ -991,8 +1663,10 @@
   // Limb bones come in pairs from index 13: upper arm, forearm, upper arm, forearm, thigh, shin, thigh, shin.
   // Cutting one frees everything below it; losing any of a leg means no more standing.
   function sever(b, k) {
+    if (b.immortal) return;
     var far = BONES[k][1];
     b.cutB[k] = true;
+    b.spots = b.spots.filter(function (w) { return w.k !== k; });
     b.off[far] = true;
     if (k % 2 === 1) b.off[BONES[k + 1][1]] = true;
     wound(b, BONES[k][0], 16, 60);
@@ -1000,11 +1674,19 @@
     if (k >= 17 && b.state === 'ok') b.state = 'broken';
   }
   function behead(b) {
+    if (b.immortal) return;
     b.cutB[0] = b.cutB[1] = b.cutB[2] = true;
     b.off[HEAD] = true;
     wound(b, HEAD, 8);
     wound(b, CH, 18);
     kill(b);
+  }
+  // A wound to joint j from any weapon. Through the head kills outright; through the chest they
+  // bleed until they die. A robot has no blood to lose, so a chest hit just kills it.
+  function vital(b, j) {
+    if (armoured(b, j)) return;
+    if (j === HEAD || (j === CH && b.sp.metal)) kill(b);
+    else if (j === CH && !b.immortal && !b.bare) b.bleed[CH] = 60;
   }
   // Blood: droplets fly from a wound, fall, and lie on the floor for a few seconds before fading
   function spray(x, y, n, power, color) {
@@ -1022,21 +1704,79 @@
   // An ordinary wound bleeds for 12 seconds and costs 60 of the body's 100 blood, so one is
   // survivable and two are not. A stump (secs = 60) bleeds until they die.
   function wound(b, j, n, secs) {
+    if (b.immortal || b.bare || armoured(b, j)) return;   // nothing to hurt, nothing left to bleed, or covered
     if (b.wounds.indexOf(j) < 0) b.wounds.push(j);
-    b.bleed[j] = Math.max(b.bleed[j] || 0, secs || 12);
-    if (fresh(b, 'w' + j)) spray(b.pts[j].x, b.pts[j].y, n, 1);
+    bruise(b, j, 0.5);
+    if (!b.sp.metal) b.bleed[j] = Math.max(b.bleed[j] || 0, secs || 12);
+    if (fresh(b, 'w' + j)) spray(b.pts[j].x, b.pts[j].y, n, 0.6);
+  }
+  // Where a wound at joint j actually is: the latest stab there, or the joint itself
+  function bleedPoint(b, j) {
+    for (var i = b.spots.length - 1; i >= 0; i--) if (b.spots[i].a === j) return spotPos(b, b.spots[i]);
+    return b.pts[j];
+  }
+  // A bleeding wound doesn't spray: it drips, and the drops fall more or less straight down
+  function drip(b, j) {
+    var at = bleedPoint(b, j);
+    if (drops.length >= 400) drops.shift();
+    drops.push({
+      x: at.x + (Math.random() - 0.5) * 3, y: at.y, vx: (Math.random() - 0.5) * 30, vy: Math.random() * 40,
+      r: 1.2 + Math.random() * 1.3, age: 0, life: 6, landed: false, c: BLOOD
+    });
+  }
+  // Blood that lands joins the puddle already there, which spreads; otherwise it starts a new one
+  function pool(x, y) {
+    for (var i = 0; i < puddles.length; i++) {
+      var p = puddles[i];
+      if (Math.abs(p.y - y) < 6 && Math.abs(p.x - x) < p.w / 2 + 6) {
+        p.w = Math.min(46, p.w + 0.7);
+        p.x += (x - p.x) * 0.05;
+        p.age = 0;
+        return;
+      }
+    }
+    puddles.push({ x: x, y: y, w: 5, age: 0 });
+    if (puddles.length > 60) puddles.shift();
+  }
+  // The trail of blood that has run down from each wound
+  function drawRuns(b) {
+    ctx.strokeStyle = BLOOD;
+    ctx.lineWidth = 2.5;
+    for (var j in b.run) {
+      var at = bleedPoint(b, +j);
+      ctx.beginPath();
+      ctx.moveTo(at.x, at.y); ctx.lineTo(at.x, at.y + b.run[j]);
+      ctx.stroke();
+    }
   }
   function stepBlood() {
     var i, d;
     for (i = 0; i < bodies.length; i++) {
       var b = bodies[i];
+      if (b.immortal && b.state !== 'dead') {
+        // whatever got through is undone at once
+        b.blood = 100;
+        b.bleed = {};
+        b.state = legless(b) ? 'broken' : 'ok';
+      }
+      if (b.fire > 0) {
+        b.fire -= STEP;
+        b.burn = Math.min(1, (b.burn || 0) + 0.1 * STEP);
+        if (b.state !== 'dead' && !b.immortal) b.blood -= 6 * STEP;
+        if (Math.random() < 0.3) {
+          var fp = b.pts[Math.floor(Math.random() * b.pts.length)];
+          flame(fp.x, fp.y, (Math.random() - 0.5) * 40, -60 - Math.random() * 80, 0.5);
+        }
+      }
       for (var j in b.bleed) {
         b.bleed[j] -= STEP;
         if (b.bleed[j] <= 0 || b.blood <= 0) { delete b.bleed[j]; continue; }
         if (!b.off[j]) b.blood -= BLEED * STEP;
-        if (Math.random() < 0.1) spray(b.pts[j].x, b.pts[j].y, 1, 0.25);
+        b.run[j] = Math.min(16, (b.run[j] || 0) + STEP * 4);
+        if (Math.random() < 0.12) drip(b, +j);
       }
       if (b.state !== 'dead') {
+        for (var n = 0; n < b.dmg.length; n++) if (b.dmg[n] > 0) b.dmg[n] -= 0.03 * STEP;
         if (b.virus) b.blood -= VIRUS_DRAIN * STEP;
         if (b.poison) b.blood -= POISON_DRAIN * STEP;
       }
@@ -1050,11 +1790,26 @@
       d.vy += GRAVITY * STEP;
       d.x = Math.min(Math.max(d.x + d.vx * STEP, 2), W - 2);
       d.y += d.vy * STEP;
+      if (liquid && d.y > surface()) { drops.splice(i, 1); continue; }
       if (d.y >= H - 2) { d.y = H - 2; d.landed = true; }
+      else if (blockAt(d)) d.landed = true;
+      if (d.landed && d.c === BLOOD) { pool(d.x, d.y); drops.splice(i, 1); }
+    }
+    stepFlames();
+    for (i = puddles.length - 1; i >= 0; i--) {
+      puddles[i].age += STEP;
+      if (puddles[i].age > 30) puddles.splice(i, 1);
     }
   }
   function drawBlood() {
     ctx.fillStyle = BLOOD;
+    for (var n = 0; n < puddles.length; n++) {
+      var pd = puddles[n];
+      ctx.globalAlpha = Math.min(1, (30 - pd.age) / 6);
+      ctx.beginPath();
+      ctx.ellipse(pd.x, pd.y, pd.w / 2, 1.5 + pd.w * 0.05, 0, 0, Math.PI * 2);
+      ctx.fill();
+    }
     for (var i = 0; i < drops.length; i++) {
       var d = drops[i];
       ctx.fillStyle = d.c;
@@ -1070,6 +1825,7 @@
   // A stabbed arm stops holding its pose and hangs loose, even while the person stands.
   // elbow is EL or ER; the hand is the joint after it.
   function limpArm(b, elbow) {
+    if (b.immortal) return;
     b.limp[elbow] = b.limp[elbow + 1] = true;
   }
   function fresh(b, key) {
@@ -1102,54 +1858,117 @@
     else if (p.x < 3) { p.x = 3; p.px = p.x; }
   }
 
-  // The tip goes in only when it is moving point-first fast enough. Head and chest are fatal;
-  // anywhere else just leaves a wound. A slower touch is pushed back out.
+  // A stab wound can be anywhere on the body. It is stored as an offset from joint a, measured
+  // along and across the line to joint o, so it stays put on the flesh as the body moves.
+  function spotPos(b, w) {
+    var u = b.pts[w.a], v = b.pts[w.o];
+    var dx = v.x - u.x, dy = v.y - u.y, d = Math.hypot(dx, dy) || 1;
+    dx /= d; dy /= d;
+    return { x: u.x + dx * w.t - dy * w.n, y: u.y + dy * w.t + dx * w.n };
+  }
+  function spotAt(b, k, a, o, x, y) {
+    var u = b.pts[a], v = b.pts[o];
+    var dx = v.x - u.x, dy = v.y - u.y, d = Math.hypot(dx, dy) || 1;
+    dx /= d; dy /= d;
+    return { k: k, a: a, o: o, t: (x - u.x) * dx + (y - u.y) * dy, n: (y - u.y) * dx - (x - u.x) * dy };
+  }
+  // The flesh under a point, if any: the head, or the nearest stretch of neck, torso, arm or leg.
+  // Returns the BONES index k, how far along it (t), the closest point on it and its thickness.
+  function fleshAt(b, x, y) {
+    var pts = b.pts, sc = b.sp.scale || 1, animal = b.sp.animal, best = null, gap = 2;
+    for (var k = 2; k < BONES.length; k++) {
+      if (b.cutB[k]) continue;
+      var r = k === 2 ? 3 * sc : k < 13 ? (animal ? b.sp.fat / 2 + 2 : 6) : animal ? 3 * sc : k < 17 ? 3.5 : 4.5;
+      var u = pts[BONES[k][0]], v = pts[BONES[k][1]];
+      var ex = v.x - u.x, ey = v.y - u.y;
+      var t = ((x - u.x) * ex + (y - u.y) * ey) / (ex * ex + ey * ey || 1);
+      t = Math.min(Math.max(t, 0), 1);
+      var cx = u.x + ex * t, cy = u.y + ey * t, d = Math.hypot(x - cx, y - cy);
+      if (d - r < gap) { gap = d - r; best = { k: k, t: t, cx: cx, cy: cy, d: d, r: r, head: false }; }
+    }
+    var hr = animal ? 8 * sc : 10, hd = Math.hypot(x - pts[HEAD].x, y - pts[HEAD].y);
+    if (hd - hr < gap) best = { k: 2, t: 0, cx: pts[HEAD].x, cy: pts[HEAD].y, d: hd, r: hr, head: true };
+    return best;
+  }
+  // A stab at a spot: it bleeds through the nearest joint, a, and shows as a hole where it went in
+  function gash(b, a, w, n) {
+    if (b.immortal || b.bare || armoured(b, a)) return;
+    b.spots.push(w);
+    if (b.spots.length > 12) b.spots.shift();
+    if (!b.sp.metal) b.bleed[a] = Math.max(b.bleed[a] || 0, 12);
+    bruise(b, a, 0.4);
+    spray(spotPos(b, w).x, spotPos(b, w).y, n, 0.5);
+  }
+
+  // The tip goes in anywhere on the body, but only when it is moving point-first fast enough.
+  // Head and chest are fatal; anywhere else just leaves a wound. A slower touch is pushed back out.
   function stab(s) {
     var tip = s.b, dirx = Math.cos(s.ang), diry = Math.sin(s.ang);
     var tvx = (tip.x - tip.px) / STEP, tvy = (tip.y - tip.py) / STEP;
     for (var i = 0; i < bodies.length; i++) {
-      var b = bodies[i];
+      var b = bodies[i], pts = b.pts;
+      if (s.grip && s.grip.body === b) continue;   // nobody stabs themselves
       if (tip.x < b.x0 - 4 || tip.x > b.x1 + 4 || tip.y < b.y0 - 4 || tip.y > b.y1 + 4) continue;
-      for (var j = 0; j < b.pts.length; j++) {
-        var p = b.pts[j];
-        var dx = tip.x - p.x, dy = tip.y - p.y, min = p.r + 2;
-        var d2 = dx * dx + dy * dy;
-        if (d2 >= min * min) continue;
-        var thrust = (tvx - (p.x - p.px) / STEP) * dirx + (tvy - (p.y - p.py) / STEP) * diry;
-        if (thrust > STAB) {
-          // a sword in your hand goes in and stays in your hand; a thrown or falling one lodges,
-          // run through at the angle it went in
-          if (held && held.sword === s) s.inside = b;
-          else s.stuck = { body: b, idx: j, rel: s.ang - spine(b) };
-          wound(b, j, 10);
-          if (j === HEAD || j === CH) kill(b);
-          if (j >= KL && b.state === 'ok') b.state = 'broken';   // a stabbed leg gives way
-          if (j >= EL && j <= WR) limpArm(b, j < ER ? EL : ER);
-          return;
+      var h = fleshAt(b, tip.x, tip.y);
+      if (!h) continue;
+      var k = h.k, u = pts[BONES[k][0]], v = pts[BONES[k][1]], t = h.t;
+      var thrust = (tvx - (u.x - u.px + (v.x - v.px - u.x + u.px) * t) / STEP) * dirx +
+        (tvy - (u.y - u.py + (v.y - v.py - u.y + u.py) * t) / STEP) * diry;
+      if (thrust > STAB * (b.hard ? 1.6 : 1)) {
+        // which joint the wound belongs to, and which other joint it is placed against
+        var a, o;
+        if (k === 2) { a = h.head || t < 0.5 ? HEAD : CH; o = a === HEAD ? CH : HEAD; }
+        else if (k < 13) {
+          // torso: the chest if the tip is in it, otherwise the nearest shoulder or hip
+          a = CH;
+          if (Math.hypot(tip.x - pts[CH].x, tip.y - pts[CH].y) > pts[CH].r) {
+            var near = Infinity;
+            [SL, SR, HL, HR].forEach(function (j) {
+              var d = Math.hypot(tip.x - pts[j].x, tip.y - pts[j].y);
+              if (d < near) { near = d; a = j; }
+            });
+          }
+          o = a === CH ? HL : CH;
+        } else {
+          a = BONES[k][t < 0.5 ? 0 : 1];
+          o = BONES[k][t < 0.5 ? 1 : 0];
         }
-        if (s.inside === b) continue;
-        var d = Math.sqrt(d2) || 0.001;
-        tip.x = p.x + dx / d * min;
-        tip.y = p.y + dy / d * min;
-      }
-      // the length of each arm and leg between its joints can be stabbed too
-      for (var k = 13; k < BONES.length; k++) {
-        if (b.cutB[k]) continue;
-        var u = b.pts[BONES[k][0]], v = b.pts[BONES[k][1]];
-        var mx = tip.x - (u.x + v.x) / 2, my = tip.y - (u.y + v.y) / 2;
-        if (mx * mx + my * my >= 81) continue;
-        var into = (tvx - (u.x - u.px + v.x - v.px) / 2 / STEP) * dirx +
-          (tvy - (u.y - u.py + v.y - v.py) / 2 / STEP) * diry;
-        if (into <= STAB) continue;
-        var far = BONES[k][1];
-        if (held && held.sword === s) s.inside = b;
-        else s.stuck = { body: b, idx: far, rel: s.ang - spine(b) };
-        wound(b, far, 10);
-        if (k >= 17 && b.state === 'ok') b.state = 'broken';
-        if (k < 17) limpArm(b, k < 15 ? EL : ER);
+        if (armoured(b, a)) { s.cool = 0.3; return; }   // the point glances off armour
+        var w = spotAt(b, k, a, o, tip.x, tip.y);
+        // the blade stays in, run through at the angle it went in, whether thrown or in your
+        // hand. Only one carried by somebody else slides back out.
+        if (s.grip) s.inside = b;
+        else s.stuck = { body: b, spot: w, rel: s.ang - spine(b) };
+        gash(b, a, w, 5);
+        vital(b, a);
+        if (k >= 17 && b.state === 'ok') b.state = 'broken';   // a stabbed leg gives way
+        if (k >= 13 && k < 17) limpArm(b, k < 15 ? EL : ER);
         return;
       }
+      if (s.inside === b) continue;
+      var d = h.d || 0.001;
+      tip.x = h.cx + (tip.x - h.cx) / d * (h.r + 2);
+      tip.y = h.cy + (tip.y - h.cy) / d * (h.r + 2);
     }
+  }
+
+  // A sword locked sideways stays level with the ground, pointing left (-1) or right (1)
+  function sideways(s) {
+    var a = s.a, b = s.b, half = s.len / 2;
+    if ((held && held.sword === s) || s.grip) {
+      b.x = a.x + s.lock * s.len; b.y = a.y;
+      b.px = b.x - (a.x - a.px); b.py = b.y - (a.y - a.py);
+      return;
+    }
+    var mx = (a.x + b.x) / 2, my = (a.y + b.y) / 2;
+    var vx = (a.x - a.px + b.x - b.px) / 2, vy = (a.y - a.py + b.y - b.py) / 2;
+    if (my > H - 3) { my = H - 3; vy = 0; vx *= 0.7; }   // it lies flat on the floor
+    if (mx < half + 3) { mx = half + 3; vx = 0; }
+    else if (mx > W - half - 3) { mx = W - half - 3; vx = 0; }
+    a.y = b.y = my;
+    a.x = mx - s.lock * half; b.x = mx + s.lock * half;
+    a.px = a.x - vx; b.px = b.x - vx;
+    a.py = b.py = my - vy;
   }
 
   // The blade is solid: it shoves any joint it touches, and a held sword does not give way.
@@ -1158,7 +1977,7 @@
     var a = s.a, t0 = 18 / s.len;
     var ex = s.b.x - a.x, ey = s.b.y - a.y;
     var avx = a.x - a.px, avy = a.y - a.py, bvx = s.b.x - s.b.px, bvy = s.b.y - s.b.py;
-    var fixed = held && held.sword === s;
+    var fixed = (held && held.sword === s) || s.frozen;
     var x0 = Math.min(a.x, s.b.x) - 14, x1 = Math.max(a.x, s.b.x) + 14;
     var y0 = Math.min(a.y, s.b.y) - 14, y1 = Math.max(a.y, s.b.y) + 14;
     var nx, ny, push;   // set by touch()
@@ -1189,19 +2008,22 @@
         s.inside = b;
         if (fresh(b, 'j' + j)) cut(b, j);
       } else if (kind.club && fresh(b, 'c')) {
+        if (armoured(b, j)) return;
+        bruise(b, j, kind.heavy ? 1.3 : 0.7);
         if (j === HEAD) kill(b);
         else if (b.state === 'ok') b.state = 'broken';
       }
     }
     function cut(b, j) {
-      if (j === HEAD && !b.off[HEAD] && Math.random() < kind.behead) { behead(b); return; }
+      if (j === HEAD && !b.off[HEAD] && Math.random() < kind.behead * (b.hard ? 0.3 : 1)) { behead(b); return; }
       wound(b, j, 10);
-      if (j === HEAD || j === CH) kill(b);
+      vital(b, j);
     }
 
     for (var i = 0; i < bodies.length; i++) {
       var b = bodies[i], pts = b.pts, p, q, into, touched = false;
       if (s.stuck && s.stuck.body === b) continue;
+      if (s.grip && s.grip.body === b) continue;
       if (x1 < b.x0 || x0 > b.x1 || y1 < b.y0 || y0 > b.y1) {
         if (s.inside === b) s.inside = null;
         continue;
@@ -1214,7 +2036,7 @@
         into = touch(p.x, p.y, p.x - p.px, p.y - p.py, p.r);
         if (into === null) continue;
         touched = true;
-        if (into > SLASH && s.cool <= 0) hit(b, j);
+        if (into > (kind.saw ? 60 : SLASH) && s.cool <= 0) hit(b, j);
         if (s.inside !== b) { p.x += nx * push; p.y += ny * push; }
       }
       // the middle of each arm and leg bone, so the blade can't slip between two joints
@@ -1225,12 +2047,12 @@
           (p.x - p.px + q.x - q.px) / 2, (p.y - p.py + q.y - q.py) / 2, 5);
         if (into === null) continue;
         touched = true;
-        if (into > SLASH && s.cool <= 0) {
+        if (into > (kind.saw ? 60 : SLASH) && s.cool <= 0) {
           if (!kind.cut) hit(b, BONES[k][1]);
           else {
             s.inside = b;
             if (fresh(b, 'b' + k)) {
-              if (Math.random() < kind.sever) { sever(b, k); continue; }
+              if (Math.random() < kind.sever * (b.hard ? 0.3 : 1)) { sever(b, k); continue; }
               cut(b, BONES[k][1]);
             }
           }
@@ -1244,29 +2066,88 @@
     }
   }
 
+  // Letting go of a weapon with its handle at a living person's free hand puts it in that hand
+  function take(s) {
+    var best = 16;
+    bodies.forEach(function (b) {
+      if (b.state === 'dead' || b.sp.animal) return;
+      [WL, WR].forEach(function (h) {
+        if (b.off[h] || b.limp[h]) return;
+        if (swords.some(function (o) { return o.grip && o.grip.body === b && o.grip.hand === h; })) return;
+        var d = Math.hypot(s.a.x - b.pts[h].x, s.a.y - b.pts[h].y);
+        if (d < best) { best = d; s.grip = { body: b, hand: h }; }
+      });
+    });
+  }
+
   function stepSword(s) {
     var a = s.a, b = s.b, dx, dy, d;
     s.cool -= STEP;
     s.flash -= STEP;
+    if (s.firing) {
+      s.heat = (s.heat || 0) - STEP;
+      if (s.heat <= 0) { fire(s); s.heat = s.kind.auto; }
+    }
+    if (s.frozen) {
+      // frozen in place: it doesn't move, but it is still solid and still cuts
+      a.px = a.x; a.py = a.y; b.px = b.x; b.py = b.y;
+      blade(s);
+      return;
+    }
+    var inHand = held && held.sword === s;
+    // a carried weapon is dropped when its holder dies or the arm is lost or goes limp
+    if (s.grip && (s.grip.body.state === 'dead' || s.grip.body.off[s.grip.hand] || s.grip.body.limp[s.grip.hand])) s.grip = null;
+    // in the hand, the swing dies down
+    if (inHand) { b.px += (b.x - b.px) * 0.008; b.py += (b.y - b.py) * 0.008; }
     moveSwordPoint(a);
     moveSwordPoint(b);
-    if (held && held.sword === s) {
-      // a held sword turns to point the way it is being moved, so a thrust leads with the tip
-      dx = held.tx - a.x; dy = held.ty - a.y;
-      if (dx * dx + dy * dy > 144) {
-        var turn = Math.atan2(dy, dx) - s.ang;
-        turn = Math.atan2(Math.sin(turn), Math.cos(turn));
-        s.ang += turn * 0.1;
+    if (inHand) {
+      // held by the handle, every weapon hangs point-down under its own weight and swings like a pendulum
+      dx = b.x - a.x; dy = b.y - a.y;
+      d = Math.hypot(dx, dy) || 0.001;
+      b.x = a.x + dx / d * s.len;
+      b.y = a.y + dy / d * s.len;
+      if (s.lock) sideways(s);
+      if (s.stuck) {
+        // Whoever is run through stays on the blade and is carried with it. A sharp tug
+        // backwards along the blade pulls it out, and the wound bleeds afresh.
+        var sb = s.stuck.body, sj = s.stuck.spot.a, cur = spotPos(sb, s.stuck.spot);
+        var ux = (b.x - a.x) / s.len, uy = (b.y - a.y) / s.len;
+        if (-((a.x - a.px) * ux + (a.y - a.py) * uy) / STEP > 900) {
+          if (!sb.sp.metal && !sb.immortal && !sb.bare) {
+            spray(cur.x, cur.y, 8, 0.6);
+            sb.bleed[sj] = Math.max(sb.bleed[sj] || 0, 12);
+          }
+          s.stuck = null;
+          s.cool = 0.3;
+        } else {
+          sb.pts[sj].x += b.x - ux * DEPTH - cur.x;
+          sb.pts[sj].y += b.y - uy * DEPTH - cur.y;
+          s.stuck.rel = Math.atan2(uy, ux) - spine(sb);
+        }
       }
-      b.x = a.x + Math.cos(s.ang) * s.len;
-      b.y = a.y + Math.sin(s.ang) * s.len;
+    } else if (s.grip) {
+      // carried: the handle stays in the hand. Someone on their feet holds it out level, pointing
+      // away from their chest; otherwise it dangles from the hand.
+      var hand = s.grip.body.pts[s.grip.hand];
+      a.x = hand.x; a.y = hand.y; a.px = hand.px; a.py = hand.py;
+      if (s.grip.body.standing) {
+        var out = hand.x < s.grip.body.pts[CH].x ? -1 : 1;
+        b.x = a.x + out * s.len; b.y = a.y;
+        b.px = b.x - (a.x - a.px); b.py = b.y - (a.y - a.py);
+      } else {
+        dx = b.x - a.x; dy = b.y - a.y;
+        d = Math.hypot(dx, dy) || 0.001;
+        b.x = a.x + dx / d * s.len;
+        b.y = a.y + dy / d * s.len;
+      }
     } else if (s.stuck) {
       // the blade stays run through the wound and moves with the body
-      var p = s.stuck.body.pts[s.stuck.idx];
+      var p = s.stuck.body.pts[s.stuck.spot.a], at = spotPos(s.stuck.body, s.stuck.spot);
       var ang = spine(s.stuck.body) + s.stuck.rel;
       var vx = p.x - p.px, vy = p.y - p.py;
       dx = Math.cos(ang); dy = Math.sin(ang);
-      b.x = p.x + dx * DEPTH; b.y = p.y + dy * DEPTH;
+      b.x = at.x + dx * DEPTH; b.y = at.y + dy * DEPTH;
       a.x = b.x - dx * s.len; a.y = b.y - dy * s.len;
       a.px = a.x - vx; a.py = a.y - vy;
       b.px = b.x - vx; b.py = b.y - vy;
@@ -1277,15 +2158,20 @@
       a.x += dx * f; a.y += dy * f;
       b.x -= dx * f; b.y -= dy * f;
     }
+    if (s.lock && !s.stuck) sideways(s);
     s.ang = Math.atan2(b.y - a.y, b.x - a.x);
     if (s.kind.stab && !s.stuck && s.cool <= 0) stab(s);
     blade(s);
     swordWall(a);
     if (!s.stuck) swordWall(b);
+    if (s.lock && !s.stuck && !inHand && !s.grip) sideways(s);
   }
 
-  // A hard enough hit on a wall breaks bones; a harder one kills. Nobody bursts.
+  // A hard enough hit on a wall breaks bones; a harder one kills; a full-speed slam leaves
+  // nothing of the body but a burst of blood.
   function hurt(b, speed) {
+    if (b.hard) speed /= 1.6;
+    if (speed > SMASH && !b.immortal) { b.smashed = true; return; }
     if (speed > KILL) {
       kill(b);
     } else if (speed > BREAK && b.state === 'ok') {
@@ -1295,17 +2181,39 @@
 
   // A healthy person with footing pulls every joint toward an upright pose above their feet
   function stand(b) {
+    var pts = b.pts, i;
     b.ground -= STEP;
-    b.standing = !b.loose && b.state === 'ok' && b.blood > 35 && b.ground > 0 && !(held && held.body === b);
+    if (b.shock > 0) {
+      // convulsing
+      b.shock -= STEP;
+      for (i = 0; i < pts.length; i++) { pts[i].x += (Math.random() - 0.5) * 5; pts[i].y += (Math.random() - 0.5) * 5; }
+    }
+    b.standing = !b.loose && b.state === 'ok' && b.blood > 35 && b.ground > 0 && !(b.shock > 0) && !(held && held.body === b);
     if (!b.standing) return;
-    var pts = b.pts;
-    var SHAPE = b.sp.shape, flip = b.flip;
-    var cx = (pts[FL].x + pts[FR].x) / 2 - b.sp.fx * flip;
-    var cy = Math.max(pts[FL].y, pts[FR].y) - b.sp.fy;
-    for (var i = 0; i < pts.length; i++) {
+    // the pose they hold: sitting, or upright, with the legs swinging if they are walking
+    var sit = b.sit && !b.sp.animal;
+    var SHAPE = sit ? SIT : b.sp.shape, flip = b.flip;
+    var cx = (pts[FL].x + pts[FR].x) / 2 - (sit ? 0 : b.sp.fx) * flip;
+    var cy = Math.max(pts[FL].y, pts[FR].y) - (sit ? 43 : b.sp.fy);
+    var walk = sit ? 0 : b.walk || 0, ph = clock * 9, k = b.sp.scale || 1;
+    if (walk) {
+      // they turn round at each wall
+      if (b.x0 < 6) walk = b.walk = 1;
+      else if (b.x1 > W - 6) walk = b.walk = -1;
+      if (b.sp.animal) b.flip = flip = walk;
+      for (i = 0; i < pts.length; i++) { pts[i].x += walk * WALK * STEP; pts[i].px += walk * WALK * STEP; }
+      cx += walk * WALK * STEP;
+    }
+    for (i = 0; i < pts.length; i++) {
       if (b.off[i] || b.limp[i]) continue;
-      pts[i].x += (cx + SHAPE[i][0] * flip - pts[i].x) * STAND;
-      pts[i].y += (cy + SHAPE[i][1] - pts[i].y) * STAND;
+      var tx = cx + SHAPE[i][0] * flip, ty = cy + SHAPE[i][1];
+      if (walk && i >= KL) {
+        var side = i < KR ? 1 : -1, amt = (i === FL || i === FR ? 1 : 0.5) * k;
+        tx += Math.sin(ph) * side * walk * 9 * amt;
+        ty -= Math.max(0, Math.cos(ph) * side) * 6 * amt;
+      }
+      pts[i].x += (tx - pts[i].x) * STAND;
+      pts[i].y += (ty - pts[i].y) * STAND;
     }
   }
 
@@ -1385,6 +2293,8 @@
             q.x += dx * f; q.y += dy * f;
             // the virus passes between any two bodies that touch
             if (a.virus ? !b.virus : b.virus) infect(a.virus ? b : a);
+            // so does fire, a little less readily
+            if ((a.fire > 0) !== (b.fire > 0) && Math.random() < 0.03) ignite(a.fire > 0 ? b : a, 6);
             // a foot resting on someone counts as footing
             if (dy > 0 && (m === FL || m === FR)) a.ground = 0.15;
             if (dy < 0 && (n === FL || n === FR)) b.ground = 0.15;
@@ -1402,36 +2312,238 @@
       var p = pts[i], r = p.r;
       var live = !b.off[i];   // a severed part hitting a wall doesn't hurt anyone
       if (p.y > H - r) {
-        if (live) { hurt(b, b.cvy); b.ground = 0.15; }
+        if (live) { hurt(b, b.cvy); thud(b, i, (p.y - p.py) / STEP); b.ground = 0.15; }
         p.y = H - r; p.py = p.y;
         p.px = p.x - (p.x - p.px) * 0.7;
       } else if (p.y < r) {
-        if (live) hurt(b, -b.cvy);
+        if (live) { hurt(b, -b.cvy); thud(b, i, (p.py - p.y) / STEP); }
         p.y = r; p.py = p.y;
       }
       if (p.x > W - r) {
-        if (live) hurt(b, b.cvx);
+        if (live) { hurt(b, b.cvx); thud(b, i, (p.x - p.px) / STEP); }
         p.x = W - r; p.px = p.x;
       } else if (p.x < r) {
-        if (live) hurt(b, -b.cvx);
+        if (live) { hurt(b, -b.cvx); thud(b, i, (p.px - p.x) / STEP); }
         p.x = r; p.px = p.x;
       }
     }
   }
 
+  function addBlock(kind, x, y) {
+    var k = BLOCKS[kind];
+    blocks.push({ k: k, w: k.w, h: k.h, x: x, y: y });
+    if (blocks.length > MAX_BLOCKS) {
+      if (held && held.block === blocks[0]) held = null;
+      blocks.shift();
+    }
+  }
+  function blockAt(pos) {
+    for (var i = blocks.length - 1; i >= 0; i--) {
+      var k = blocks[i];
+      if (Math.abs(pos.x - k.x) <= k.w / 2 && Math.abs(pos.y - k.y) <= k.h / 2) return { block: k };
+    }
+    return null;
+  }
+  // Blocks don't give way to anything. Whatever overlaps one is pushed out by the shortest route.
+  function hitBlocks() {
+    var i, j, s, dx, dy, px, py;
+    for (var n = 0; n < blocks.length; n++) {
+      var k = blocks[n], hw = k.w / 2, hh = k.h / 2;
+      for (i = 0; i < bodies.length; i++) {
+        var b = bodies[i];
+        if (b.x1 < k.x - hw - 30 || b.x0 > k.x + hw + 30 || b.y1 < k.y - hh - 30 || b.y0 > k.y + hh + 30) continue;
+        for (j = 0; j < b.pts.length; j++) {
+          var p = b.pts[j], live = !b.off[j];
+          dx = p.x - k.x; dy = p.y - k.y;
+          px = hw + p.r - Math.abs(dx); py = hh + p.r - Math.abs(dy);
+          if (px <= 0 || py <= 0) continue;
+          if (px < py) {
+            s = dx < 0 ? -1 : 1;
+            if (live) { hurt(b, -b.cvx * s); thud(b, j, (p.px - p.x) / STEP * s); }
+            p.x += s * px; p.px = p.x;
+          } else {
+            s = dy < 0 ? -1 : 1;
+            if (live) { hurt(b, -b.cvy * s); thud(b, j, (p.py - p.y) / STEP * s); }
+            p.y += s * py; p.py = p.y;
+            if (s < 0) {
+              // standing on top
+              p.px = p.x - (p.x - p.px) * 0.7;
+              if (live) b.ground = 0.15;
+            }
+          }
+        }
+      }
+      for (i = 0; i < swords.length; i++) {
+        if (swords[i].frozen) continue;
+        for (j = 0; j < 2; j++) {
+          var q = j ? swords[i].b : swords[i].a;
+          dx = q.x - k.x; dy = q.y - k.y;
+          px = hw + 3 - Math.abs(dx); py = hh + 3 - Math.abs(dy);
+          if (px <= 0 || py <= 0) continue;
+          if (px < py) { q.x += (dx < 0 ? -1 : 1) * px; q.px = q.x; }
+          else { q.y += (dy < 0 ? -1 : 1) * py; q.py = q.y; q.px = q.x - (q.x - q.px) * 0.7; }
+        }
+      }
+      // vehicles and bombs are boxes too: they stop against a block, or rest on top of it
+      for (i = 0; i < vehicles.length + bombs.length; i++) {
+        var v = i < vehicles.length ? vehicles[i] : bombs[i - vehicles.length];
+        if (v.frozen) continue;
+        var vw = v.k.w ? v.w / 2 : v.r, vh = v.k.h ? v.h / 2 : v.r;
+        dx = v.x - k.x; dy = v.y - k.y;
+        px = hw + vw - Math.abs(dx); py = hh + vh - Math.abs(dy);
+        if (px <= 0 || py <= 0) continue;
+        if (px < py) {
+          s = dx < 0 ? -1 : 1;
+          v.x += s * px;
+          if (v.vx * s < 0) v.vx = 0;
+          if (v.on) v.dir = s;
+        } else {
+          s = dy < 0 ? -1 : 1;
+          v.y += s * py;
+          if (v.vy * s < 0) v.vy = 0;
+          if (s < 0) { v.ground = true; if (!v.k.w) v.vx *= 0.95; }
+        }
+      }
+    }
+  }
+
+  // Links join two things: a rope only stops them getting further apart, a rod keeps them a
+  // fixed distance apart, a spring pulls them gently back to where it was tied. Each end is an
+  // anchor: a joint or weapon end (pt), the middle of a vehicle, bomb or block, or a fixed spot
+  // on the background.
+  function anchorAt(pos) {
+    var hit = bombAt(pos) || swordAt(pos);
+    if (hit && hit.bomb) return { o: hit.bomb, list: bombs };
+    if (hit) {
+      var w = hit.sword;
+      var end = Math.hypot(pos.x - w.a.x, pos.y - w.a.y) < Math.hypot(pos.x - w.b.x, pos.y - w.b.y) ? w.a : w.b;
+      return { o: w, list: swords, pt: end };
+    }
+    hit = jointAt(pos);
+    if (hit) return { o: hit.body, list: bodies, pt: hit.pt };
+    hit = vehicleAt(pos);
+    if (hit) return { o: hit.vehicle, list: vehicles, dx: pos.x - hit.vehicle.x, dy: pos.y - hit.vehicle.y, heavy: true };
+    hit = blockAt(pos);
+    if (hit) return { o: hit.block, list: blocks, dx: pos.x - hit.block.x, dy: pos.y - hit.block.y, fixed: true };
+    return { o: null, x: pos.x, y: pos.y, fixed: true };
+  }
+  function there(a) { return !a.o || a.list.indexOf(a.o) >= 0; }
+  function anchorPos(a) {
+    return a.pt || (a.o ? { x: a.o.x + (a.dx || 0), y: a.o.y + (a.dy || 0) } : a);
+  }
+  // How readily an end gives way: fixed and frozen things not at all, vehicles only a little
+  function give(a) {
+    return a.fixed || (a.o && a.o.frozen) ? 0 : a.heavy ? 0.15 : 1;
+  }
+  function shove(a, dx, dy) {
+    if (a.pt) { a.pt.x += dx; a.pt.y += dy; return; }
+    a.o.x += dx; a.o.y += dy;
+    a.o.vx += dx / STEP; a.o.vy += dy / STEP;
+  }
+  function stepLinks() {
+    for (var i = 0; i < links.length; i++) {
+      var l = links[i], p = anchorPos(l.a), q = anchorPos(l.b);
+      var dx = q.x - p.x, dy = q.y - p.y, d = Math.hypot(dx, dy) || 0.001;
+      if (l.kind === 'rope' && d <= l.len) continue;
+      var wa = give(l.a), wb = give(l.b);
+      if (!(wa + wb)) continue;
+      var f = (d - l.len) / d * (l.kind === 'spring' ? 0.04 : 1) / (wa + wb);
+      if (wa) shove(l.a, dx * f * wa, dy * f * wa);
+      if (wb) shove(l.b, -dx * f * wb, -dy * f * wb);
+    }
+  }
+  function drawLinks() {
+    for (var i = 0; i < links.length; i++) {
+      var l = links[i], p = anchorPos(l.a), q = anchorPos(l.b);
+      var dx = q.x - p.x, dy = q.y - p.y, d = Math.hypot(dx, dy) || 0.001;
+      ctx.beginPath();
+      ctx.moveTo(p.x, p.y);
+      if (l.kind === 'rope') {
+        // a slack rope sags
+        var sag = d < l.len ? Math.sqrt(l.len * l.len - d * d) / 2 : 0;
+        ctx.strokeStyle = '#9a7b4f';
+        ctx.lineWidth = 2.5;
+        ctx.quadraticCurveTo((p.x + q.x) / 2, (p.y + q.y) / 2 + sag, q.x, q.y);
+      } else if (l.kind === 'rod') {
+        ctx.strokeStyle = '#7b8496';
+        ctx.lineWidth = 4;
+        ctx.lineTo(q.x, q.y);
+      } else {
+        ctx.strokeStyle = '#3fa66b';
+        ctx.lineWidth = 2;
+        for (var n = 1; n < 12; n++) {
+          var z = n % 2 ? 5 : -5;
+          ctx.lineTo(p.x + dx * n / 12 - dy / d * z, p.y + dy * n / 12 + dx / d * z);
+        }
+        ctx.lineTo(q.x, q.y);
+      }
+      ctx.stroke();
+    }
+    if (tying) {
+      // the loose end follows the pointer until it is tied off
+      var from = anchorPos(tying.a);
+      ctx.strokeStyle = '#8a94a8';
+      ctx.lineWidth = 2;
+      ctx.setLineDash([6, 5]);
+      ctx.beginPath();
+      ctx.moveTo(from.x, from.y); ctx.lineTo(mouse.x, mouse.y);
+      ctx.stroke();
+      ctx.setLineDash([]);
+      ctx.fillStyle = '#8a94a8';
+      ctx.font = '13px system-ui, sans-serif';
+      ctx.fillText('Click what to tie the ' + tying.kind + ' to, or an empty spot to fix it there. Esc cancels.', 12, 22);
+    }
+  }
+  // A blue stud marks anything frozen in place
+  function drawPin(x, y) {
+    ctx.fillStyle = '#5ad1e6';
+    ctx.strokeStyle = '#ffffff';
+    ctx.lineWidth = 1.5;
+    ctx.beginPath();
+    ctx.arc(x, y, 4, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.stroke();
+  }
+
   function step() {
     var i, n;
     clock += STEP;
+    if (held && held.block) { held.block.x = held.tx; held.block.y = held.ty; }
+    // a link goes when either thing it joins is gone
+    links = links.filter(function (l) { return there(l.a) && there(l.b); });
     for (i = 0; i < bodies.length; i++) { integrate(bodies[i]); stand(bodies[i]); }
     for (n = 0; n < STIFFNESS; n++) {
       for (i = 0; i < bodies.length; i++) bones(bodies[i]);
+      stepLinks();
     }
     collide();
     for (i = 0; i < bodies.length; i++) walls(bodies[i]);
+    stepLiquid();
     for (i = 0; i < vehicles.length; i++) stepVehicle(vehicles[i]);
     collideVehicles();
     stepBombs();
+    stepRockets();
     for (i = 0; i < swords.length; i++) stepSword(swords[i]);
+    hitBlocks();
+    // anyone slammed hard enough is gone: what is left flies out from every part of them
+    for (i = bodies.length - 1; i >= 0; i--) {
+      var sm = bodies[i];
+      if (!sm.smashed) continue;
+      var bits = sm.bare ? '#cfc8b4' : sm.sp.metal ? '#9aa3b2' : BLOOD;
+      for (n = 0; n < sm.pts.length; n++) spray(sm.pts[n].x, sm.pts[n].y, 7, 1.6, bits);
+      forget(sm);
+      bodies.splice(i, 1);
+    }
+    // a frozen body is put back exactly where it was frozen, except any part cut off since
+    for (i = 0; i < bodies.length; i++) {
+      var fb = bodies[i];
+      if (!fb.frozen) continue;
+      for (n = 0; n < fb.pts.length; n++) {
+        if (fb.off[n]) continue;
+        fb.pts[n].x = fb.pts[n].px = fb.pin[n].x;
+        fb.pts[n].y = fb.pts[n].py = fb.pin[n].y;
+      }
+    }
     stepBlood();
     for (i = shots.length - 1; i >= 0; i--) {
       shots[i].age += STEP;
@@ -1471,6 +2583,27 @@
       ctx.closePath();
       ctx.fill();
       ctx.stroke();
+    } else if (s.type === 'hammer') {
+      ctx.fillStyle = '#7a4a22';
+      ctx.fillRect(0, -2.5, len - 14, 5);
+      ctx.fillStyle = '#8a94a8';
+      ctx.fillRect(len - 16, -11, 16, 22);
+    } else if (s.type === 'crowbar') {
+      ctx.fillStyle = '#4a5160';
+      ctx.fillRect(0, -2, len, 4);
+      ctx.fillRect(len - 4, -9, 4, 9);
+    } else if (s.type === 'chainsaw') {
+      ctx.fillStyle = '#e3722f';
+      ctx.fillRect(0, -9, 26, 18);
+      ctx.fillStyle = '#b9c1cd';
+      ctx.fillRect(24, -5, len - 24, 10);
+      // the chain runs round the bar
+      ctx.strokeStyle = '#3a404c';
+      ctx.lineWidth = 2;
+      ctx.setLineDash([3, 2]);
+      ctx.lineDashOffset = -clock * 120;
+      ctx.strokeRect(24, -5, len - 24, 10);
+      ctx.setLineDash([]);
     } else if (s.type === 'spear') {
       ctx.fillStyle = '#7a4a22';
       ctx.fillRect(0, -2, len - 18, 4);
@@ -1490,7 +2623,7 @@
       if (Math.cos(s.ang) < 0) ctx.scale(1, -1);   // keep the grip underneath
       ctx.fillStyle = '#3a404c';
       ctx.fillRect(long ? 15 : 0, 0, 8, long ? 12 : 17);
-      ctx.fillStyle = '#7b8496';
+      ctx.fillStyle = s.kind.color || '#7b8496';
       ctx.fillRect(0, -4, len, s.type === 'shotgun' ? 9 : 7);
       if (long) {
         ctx.fillStyle = '#7a4a22';
@@ -1511,14 +2644,27 @@
   function shot(s, ang) {
     var dx = Math.cos(ang), dy = Math.sin(ang), ox = s.b.x, oy = s.b.y;
     function damage(b, j) {
+      if (s.kind.zap) { shock(b, 3); return; }
+      if (s.kind.laser) ignite(b, 6);
       wound(b, j, 14);
       b.pts[j].x += dx * 8;
       b.pts[j].y += dy * 8;
-      if (j === HEAD || j === CH) kill(b);
+      vital(b, j);
     }
     var best = Infinity, hitB = null, hitJ = -1;
     if (dx > 0) best = Math.min(best, (W - ox) / dx); else if (dx < 0) best = Math.min(best, -ox / dx);
     if (dy > 0) best = Math.min(best, (H - oy) / dy); else if (dy < 0) best = Math.min(best, -oy / dy);
+    // blocks are cover: the shot stops at the nearest face in its way
+    blocks.forEach(function (k) {
+      var t0 = 0, t1 = best;
+      [[ox, dx, k.x, k.w / 2], [oy, dy, k.y, k.h / 2]].forEach(function (ax) {
+        if (Math.abs(ax[1]) < 1e-9) { if (Math.abs(ax[0] - ax[2]) > ax[3]) t1 = -1; return; }
+        var n = (ax[2] - ax[3] - ax[0]) / ax[1], x = (ax[2] + ax[3] - ax[0]) / ax[1];
+        t0 = Math.max(t0, Math.min(n, x));
+        t1 = Math.min(t1, Math.max(n, x));
+      });
+      if (t0 <= t1) best = t0;
+    });
     for (var i = 0; i < bodies.length; i++) {
       var pts = bodies[i].pts;
       for (var j = 0; j < pts.length; j++) {
@@ -1531,10 +2677,21 @@
       }
     }
     if (hitB) damage(hitB, hitJ);
-    shots.push({ x0: ox, y0: oy, x1: ox + dx * best, y1: oy + dy * best, age: 0 });
+    shots.push({ x0: ox, y0: oy, x1: ox + dx * best, y1: oy + dy * best, age: 0, c: s.kind.zap ? '#5ad1e6' : s.kind.laser ? '#ff3b30' : '#e3a02f' });
+  }
+  // Pulling the trigger: one shot, or for an automatic, firing until it is pulled again
+  function trigger(s) {
+    if (s.kind.auto) s.firing = !s.firing;
+    else fire(s);
   }
   function fire(s) {
-    var n = s.kind.pellets || 1;
+    if (s.kind.flame) {
+      var fa = s.ang + (Math.random() - 0.5) * 0.25;
+      flame(s.b.x, s.b.y, Math.cos(fa) * 520, Math.sin(fa) * 520, 0.45, true);
+      return;
+    }
+    var n = s.kind.rocket ? 0 : s.kind.pellets || 1;
+    if (s.kind.rocket) launch(s.b.x, s.b.y, s.ang);
     for (var i = 0; i < n; i++) shot(s, s.ang + (Math.random() - 0.5) * (s.kind.spread || 0));
     s.flash = 0.06;
     // recoil, harder for the long guns
@@ -1553,8 +2710,8 @@
     ctx.fillRect(0, -3, 14, 6);
     ctx.fillStyle = '#e3a02f';
     ctx.fillRect(13, -9, 5, 18);
-    ctx.fillStyle = '#b9c1cd';
-    ctx.strokeStyle = '#6f7885';
+    ctx.fillStyle = s.kind.glow || '#b9c1cd';
+    ctx.strokeStyle = s.kind.glow || '#6f7885';
     ctx.lineWidth = 1;
     ctx.beginPath();
     ctx.moveTo(18, -3.5);
@@ -1643,19 +2800,146 @@
       ctx.arc(ex, ey, 1.5 * k, 0, Math.PI * 2);
       ctx.fill();
     }
+    drawBruises(b);
+    drawRuns(b);
     ctx.fillStyle = BLOOD;
     for (var w = 0; w < b.wounds.length; w++) {
       ctx.beginPath();
       ctx.arc(p[b.wounds[w]].x, p[b.wounds[w]].y, 3, 0, Math.PI * 2);
       ctx.fill();
     }
+    for (w = 0; w < b.spots.length; w++) {
+      var at = spotPos(b, b.spots[w]);
+      ctx.beginPath();
+      ctx.arc(at.x, at.y, 3, 0, Math.PI * 2);
+      ctx.fill();
+    }
+  }
+
+  // What acid leaves behind: bare bones in place of the body
+  function drawSkeleton(b) {
+    var p = b.pts, k = b.sp.scale || 1, head = p[HEAD], c = '#cfc8b4';
+    function mid(u, v, t) { return { x: u.x + (v.x - u.x) * t, y: u.y + (v.y - u.y) * t }; }
+    for (var n = 13; n < BONES.length; n += 2) limb(b, n, 3 * k, c);
+    var top = b.sp.animal ? p[SR] : mid(p[SL], p[SR], 0.5), tail = b.sp.animal ? p[HR] : mid(p[HL], p[HR], 0.5);
+    ctx.strokeStyle = c;
+    ctx.lineWidth = 3 * k;
+    ctx.beginPath();
+    ctx.moveTo(top.x, top.y); ctx.lineTo(tail.x, tail.y);            // spine
+    ctx.moveTo(p[SL].x, p[SL].y); ctx.lineTo(p[SR].x, p[SR].y);      // shoulders
+    ctx.moveTo(p[HL].x, p[HL].y); ctx.lineTo(p[HR].x, p[HR].y);      // hips
+    if (!b.off[HEAD]) { ctx.moveTo(top.x, top.y); ctx.lineTo(head.x, head.y); }
+    ctx.stroke();
+    if (!b.sp.animal) {
+      ctx.lineWidth = 2;
+      ctx.beginPath();
+      for (var t = 0.2; t < 0.7; t += 0.2) {
+        var l = mid(p[SL], p[HL], t), r = mid(p[SR], p[HR], t);
+        ctx.moveTo(l.x, l.y); ctx.lineTo(r.x, r.y);                  // ribs
+      }
+      ctx.stroke();
+    }
+    // skull, with the eye sockets on the side facing the chest
+    var up = Math.atan2(head.y - p[CH].y, head.x - p[CH].x), ux = Math.cos(up), uy = Math.sin(up);
+    ctx.fillStyle = c;
+    ctx.beginPath();
+    ctx.arc(head.x, head.y, b.sp.animal ? 6 * k : 8.5, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.fillStyle = '#3b3230';
+    for (var s = -1; s <= 1; s += 2) {
+      ctx.beginPath();
+      ctx.arc(head.x - ux * 2 * k - uy * 3 * k * s, head.y - uy * 2 * k + ux * 3 * k * s, 2 * k, 0, Math.PI * 2);
+      ctx.fill();
+    }
+  }
+  // A ring round the head shows a potion at work: gold for immortal, grey for hard skin
+  function drawAura(b) {
+    var head = b.pts[HEAD], r = b.sp.animal ? 8 * b.sp.scale : 10;
+    ctx.lineWidth = 2;
+    if (b.hard) {
+      ctx.strokeStyle = '#6f7885';
+      ctx.beginPath();
+      ctx.arc(head.x, head.y, r + 1, 0, Math.PI * 2);
+      ctx.stroke();
+    }
+    if (b.shock > 0) {
+      // sparks
+      ctx.strokeStyle = '#ffe14a';
+      ctx.beginPath();
+      for (var n = 0; n < 4; n++) {
+        var sp = b.pts[Math.floor(Math.random() * b.pts.length)];
+        ctx.moveTo(sp.x - 5, sp.y - 4); ctx.lineTo(sp.x + 1, sp.y); ctx.lineTo(sp.x - 2, sp.y + 1); ctx.lineTo(sp.x + 5, sp.y + 5);
+      }
+      ctx.stroke();
+    }
+    if (b.immortal) {
+      ctx.strokeStyle = '#ffd24a';
+      ctx.beginPath();
+      ctx.arc(head.x, head.y, r + 4, 0, Math.PI * 2);
+      ctx.stroke();
+    }
+  }
+
+  // What a fruit person or robot has on top of its head, drawn with "up" pointing away from the chest
+  function drawTop(b, up) {
+    var top = b.sp.top, x;
+    ctx.save();
+    ctx.translate(b.pts[HEAD].x, b.pts[HEAD].y);
+    ctx.rotate(up + Math.PI / 2);
+    ctx.beginPath();
+    if (top === 'melon') {
+      // rind stripes
+      ctx.strokeStyle = '#2f7a3a';
+      ctx.lineWidth = 2;
+      for (x = -6; x <= 6; x += 6) { ctx.moveTo(x, -Math.sqrt(90 - x * x)); ctx.lineTo(x, -1.5); }
+      ctx.stroke();
+    } else if (top === 'pumpkin') {
+      ctx.fillStyle = '#7a4a22';
+      ctx.fillRect(-2, -15, 4, 6);
+      ctx.strokeStyle = '#c46a12';
+      ctx.lineWidth = 1.5;
+      for (x = -1; x <= 1; x += 2) { ctx.moveTo(5 * x, -8); ctx.quadraticCurveTo(7 * x, -4, 5 * x, -0.5); }
+      ctx.stroke();
+    } else if (top === 'corn') {
+      // kernels
+      ctx.fillStyle = '#d9a520';
+      [[-5, -5], [0, -7], [5, -5], [-2.5, -2.5], [2.5, -2.5]].forEach(function (k) {
+        ctx.moveTo(k[0] + 1.3, k[1]);
+        ctx.arc(k[0], k[1], 1.3, 0, Math.PI * 2);
+      });
+      ctx.fill();
+    } else if (top === 'apple') {
+      ctx.strokeStyle = '#7a4a22';
+      ctx.lineWidth = 2;
+      ctx.moveTo(0, -9); ctx.lineTo(1, -15);
+      ctx.stroke();
+      ctx.fillStyle = '#3fa66b';
+      ctx.beginPath();
+      ctx.ellipse(5, -14, 4, 2, -0.3, 0, Math.PI * 2);
+      ctx.fill();
+    } else {
+      // robot antenna
+      ctx.strokeStyle = '#3a404c';
+      ctx.lineWidth = 2;
+      ctx.moveTo(0, -9); ctx.lineTo(0, -16);
+      ctx.stroke();
+      ctx.fillStyle = '#ff3b30';
+      ctx.beginPath();
+      ctx.arc(0, -17, 2, 0, Math.PI * 2);
+      ctx.fill();
+    }
+    ctx.restore();
   }
 
   function drawPerson(b) {
-    if (b.sp.animal) { drawAnimal(b); return; }
+    if (b.bare) { drawSkeleton(b); return; }
+    if (b.sp.animal) { drawAnimal(b); drawAura(b); return; }
     var p = b.pts, head = p[HEAD];
-    limb(b, 17, 9, PANTS);
-    limb(b, 19, 9, PANTS);
+    var nx = (p[SL].x + p[SR].x) / 2, ny = (p[SL].y + p[SR].y) / 2;
+    var up = Math.atan2(head.y - p[CH].y, head.x - p[CH].x);
+
+    limb(b, 17, 9, b.pants);
+    limb(b, 19, 9, b.pants);
     if (b.state !== 'ok') {
       // broken legs show a mark at each knee
       ctx.fillStyle = '#b3243a';
@@ -1668,7 +2952,7 @@
     ctx.strokeStyle = b.skin;
     ctx.lineWidth = 6;
     ctx.beginPath();
-    ctx.moveTo((p[SL].x + p[SR].x) / 2, (p[SL].y + p[SR].y) / 2);
+    ctx.moveTo(nx, ny);
     if (!b.off[HEAD]) ctx.lineTo(head.x, head.y);
     ctx.stroke();
     // torso
@@ -1682,6 +2966,12 @@
     ctx.closePath();
     ctx.fill();
     ctx.stroke();
+    if (b.vest) {
+      ctx.fillStyle = ctx.strokeStyle = '#3a404c';
+      ctx.lineWidth = 5;
+      ctx.fill();
+      ctx.stroke();
+    }
     limb(b, 13, 7, b.skin);
     limb(b, 15, 7, b.skin);
     // head, with hair on the side facing away from the chest
@@ -1689,12 +2979,23 @@
     ctx.beginPath();
     ctx.arc(head.x, head.y, 10, 0, Math.PI * 2);
     ctx.fill();
-    var up = Math.atan2(head.y - p[CH].y, head.x - p[CH].x);
-    ctx.fillStyle = b.hair;
-    ctx.beginPath();
-    ctx.arc(head.x, head.y, 10, up - Math.PI / 2, up + Math.PI / 2);
-    ctx.closePath();
-    ctx.fill();
+    if (b.sp.top) drawTop(b, up);
+    else {
+      ctx.fillStyle = b.hair;
+      ctx.beginPath();
+      ctx.arc(head.x, head.y, 10, up - Math.PI / 2, up + Math.PI / 2);
+      ctx.closePath();
+      ctx.fill();
+    }
+    drawBruises(b);
+    if (b.helmet) {
+      ctx.fillStyle = '#3a404c';
+      ctx.beginPath();
+      ctx.arc(head.x, head.y, 11.5, up - Math.PI / 2, up + Math.PI / 2);
+      ctx.closePath();
+      ctx.fill();
+    }
+    drawAura(b);
     // eyes: open when healthy, squeezed shut with broken bones, crosses when dead
     var ux = Math.cos(up), uy = Math.sin(up);
     ctx.fillStyle = ctx.strokeStyle = '#1d1a19';
@@ -1715,10 +3016,17 @@
         ctx.stroke();
       }
     }
-    // stab wounds
+    drawRuns(b);
+    // wounds
     ctx.fillStyle = '#b3243a';
     for (var w = 0; w < b.wounds.length; w++) {
       var wp = p[b.wounds[w]];
+      ctx.beginPath();
+      ctx.arc(wp.x, wp.y, 3, 0, Math.PI * 2);
+      ctx.fill();
+    }
+    for (w = 0; w < b.spots.length; w++) {
+      wp = spotPos(b, b.spots[w]);
       ctx.beginPath();
       ctx.arc(wp.x, wp.y, 3, 0, Math.PI * 2);
       ctx.fill();
@@ -1728,19 +3036,36 @@
   function draw() {
     ctx.clearRect(0, 0, W, H);
     ctx.lineCap = ctx.lineJoin = 'round';
-    for (var i = 0; i < vehicles.length; i++) drawVehicle(vehicles[i]);
+    for (var i = 0; i < blocks.length; i++) {
+      var k = blocks[i];
+      ctx.fillStyle = k.k.color;
+      ctx.strokeStyle = k.k.edge;
+      ctx.lineWidth = 2;
+      ctx.fillRect(k.x - k.w / 2, k.y - k.h / 2, k.w, k.h);
+      ctx.strokeRect(k.x - k.w / 2 + 1, k.y - k.h / 2 + 1, k.w - 2, k.h - 2);
+    }
+    for (i = 0; i < vehicles.length; i++) drawVehicle(vehicles[i]);
     ctx.lineCap = ctx.lineJoin = 'round';
     for (i = 0; i < bodies.length; i++) drawPerson(bodies[i]);
+    drawLinks();
     drawBlood();
     ctx.lineCap = ctx.lineJoin = 'round';
     for (i = 0; i < swords.length; i++) drawSword(swords[i]);
     for (i = 0; i < bombs.length; i++) drawBomb(bombs[i]);
+    drawRockets();
+    drawFlames();
+    drawLiquid();
+    for (i = 0; i < bodies.length; i++) if (bodies[i].frozen) drawPin(bodies[i].pts[CH].x, bodies[i].pts[CH].y);
+    for (i = 0; i < swords.length; i++) if (swords[i].frozen) drawPin((swords[i].a.x + swords[i].b.x) / 2, (swords[i].a.y + swords[i].b.y) / 2);
+    for (i = 0; i < vehicles.length; i++) if (vehicles[i].frozen) drawPin(vehicles[i].x, vehicles[i].y);
+    for (i = 0; i < bombs.length; i++) if (bombs[i].frozen) drawPin(bombs[i].x, bombs[i].y);
     drawBooms();
     // bullet tracers
     ctx.strokeStyle = '#e3a02f';
     ctx.lineWidth = 2;
     for (i = 0; i < shots.length; i++) {
       ctx.globalAlpha = 1 - shots[i].age / 0.1;
+      ctx.strokeStyle = shots[i].c;
       ctx.beginPath();
       ctx.moveTo(shots[i].x0, shots[i].y0);
       ctx.lineTo(shots[i].x1, shots[i].y1);
@@ -1750,7 +3075,7 @@
   }
 
   function tick(t) {
-    acc += Math.min(0.05, (t - last) / 1000);
+    if (!paused) acc += Math.min(0.05, (t - last) / 1000) * speed;
     last = t;
     var n = 0;
     while (acc >= STEP && n < 6) { step(); acc -= STEP; n++; }
@@ -1807,10 +3132,21 @@
 
   // Dragging people that are already in the box, by whichever body part was grabbed
   canvas.addEventListener('pointerdown', function (e) {
+    if (e.button !== 0 || e.ctrlKey) return;   // right-click opens the weapon menu instead
     var pos = local(e);
-    var hit = bombAt(pos) || swordAt(pos) || jointAt(pos) || vehicleAt(pos);
-    if (!hit) return;
-    var thing = hit.vehicle || hit.bomb;
+    if (tying) {
+      // this click ties off the loose end
+      var end = anchorAt(pos), p = anchorPos(tying.a), q = anchorPos(end);
+      e.preventDefault();
+      if (end.pt ? end.pt === tying.a.pt : end.o && end.o === tying.a.o) return;
+      links.push({ kind: tying.kind, a: tying.a, b: end, len: Math.max(10, Math.hypot(q.x - p.x, q.y - p.y)) });
+      if (links.length > MAX_LINKS) links.shift();
+      tying = null;
+      return;
+    }
+    var hit = bombAt(pos) || swordAt(pos) || jointAt(pos) || vehicleAt(pos) || blockAt(pos);
+    if (!hit || (hit.body && hit.body.frozen)) return;
+    var thing = hit.vehicle || hit.bomb || hit.block;
     if (thing) {
       // hold it where it was grabbed, and remember the press so a tap can work the engine or fuse
       hit.ox = thing.x - pos.x;
@@ -1820,8 +3156,8 @@
       hit.t0 = performance.now();
     }
     if (hit.sword) {
-      // picking a sword up pulls it out of whoever it was in
-      hit.sword.stuck = null;
+      // a sword that is stuck in someone stays in: see stepSword for pulling it out
+      hit.sword.grip = null;
       hit.sword.cool = 0.25;
       // keep the handle where it is under the pointer, and remember the press so a tap can fire a gun
       hit.ox = hit.sword.a.x - pos.x;
@@ -1837,12 +3173,12 @@
     canvas.style.cursor = 'grabbing';
   });
   canvas.addEventListener('pointermove', function (e) {
-    var pos = local(e);
+    var pos = mouse = local(e);
     if (held) {
       if ((held.sword || held.vehicle || held.bomb) && Math.hypot(pos.x - held.sx, pos.y - held.sy) > 8) held.moved = true;
       aim(pos);
     }
-    else canvas.style.cursor = bombAt(pos) || swordAt(pos) || jointAt(pos) || vehicleAt(pos) ? 'grab' : '';
+    else canvas.style.cursor = tying ? 'crosshair' : bombAt(pos) || swordAt(pos) || jointAt(pos) || vehicleAt(pos) || blockAt(pos) ? 'grab' : '';
   });
   function release() {
     // a quick tap on a gun, without dragging it, fires it
@@ -1854,14 +3190,124 @@
     }
     // and on a bomb it lights the fuse, which can't be put out
     if (held && held.bomb && !held.moved && performance.now() - held.t0 < 350 && held.bomb.fuse === null) {
-      held.bomb.fuse = held.bomb.k.fuse;
+      light(held.bomb);
     }
+    if (held && held.sword && !held.sword.frozen && !held.sword.stuck) take(held.sword);
     held = null;
-    if (gun) fire(gun);
+    if (gun) trigger(gun);
     canvas.style.cursor = '';
   }
   canvas.addEventListener('pointerup', release);
   canvas.addEventListener('pointercancel', release);
+
+  // Right-clicking opens a menu for whatever is under the pointer, or for the whole box on
+  // empty space. Each item is [label, action, ticked].
+  var menu = document.createElement('div');
+  menu.className = 'menu';
+  menu.hidden = true;
+  document.body.appendChild(menu);
+  function closeMenu() { menu.hidden = true; }
+  function showMenu(e, items) {
+    menu.textContent = '';
+    items.forEach(function (it) {
+      var btn = document.createElement('button');
+      btn.type = 'button';
+      btn.textContent = (it[2] ? '\u2713 ' : '') + it[0];
+      btn.addEventListener('click', function () { closeMenu(); it[1](); });
+      menu.appendChild(btn);
+    });
+    menu.style.left = Math.min(e.clientX, window.innerWidth - 200) + 'px';
+    menu.style.top = Math.max(0, Math.min(e.clientY, window.innerHeight - items.length * 31 - 16)) + 'px';
+    menu.hidden = false;
+  }
+  function setPaused(on) {
+    paused = on;
+    pauseBtn.textContent = paused ? 'Resume' : 'Pause';
+    pauseBtn.setAttribute('aria-pressed', paused);
+  }
+  function nextSpeed() {
+    speed = SPEEDS[(SPEEDS.indexOf(speed) + 1) % SPEEDS.length];
+    speedBtn.textContent = 'Speed ' + (speed === 1 ? '1' : speed === 0.5 ? '\u00bd' : '\u00bc') + '\u00d7';
+  }
+  function clearAll() {
+    bodies.length = swords.length = vehicles.length = bombs.length = blocks.length = 0;
+    drops.length = shots.length = booms.length = links.length = puddles.length = 0;
+    flames.length = rockets.length = 0;
+    held = tying = null;
+  }
+  var pauseBtn = document.getElementById('pause'), speedBtn = document.getElementById('speed');
+  pauseBtn.addEventListener('click', function () { setPaused(!paused); });
+  speedBtn.addEventListener('click', nextSpeed);
+  document.getElementById('clear').addEventListener('click', clearAll);
+  // the liquid button fills the bottom of the box with each liquid in turn, then drains it
+  var liquidBtn = document.getElementById('liquid');
+  liquidBtn.addEventListener('click', function () {
+    var all = [null, 'water', 'acid', 'lava'];
+    liquid = all[(all.indexOf(liquid) + 1) % all.length];
+    liquidBtn.textContent = 'Liquid: ' + (liquid || 'none');
+  });
+
+  canvas.addEventListener('contextmenu', function (e) {
+    e.preventDefault();
+    var pos = local(e);
+    var hit = bombAt(pos) || swordAt(pos) || jointAt(pos) || vehicleAt(pos) || blockAt(pos);
+    if (!hit) {
+      showMenu(e, [
+        [paused ? 'Resume' : 'Pause', function () { setPaused(!paused); }],
+        ['Change speed', nextSpeed],
+        ['Clear everything', clearAll]
+      ]);
+      return;
+    }
+    var o = hit.bomb || hit.sword || hit.body || hit.vehicle || hit.block;
+    var list = hit.bomb ? bombs : hit.sword ? swords : hit.body ? bodies : hit.vehicle ? vehicles : blocks;
+    var items = [];
+    if (hit.sword) {
+      [[-1, 'Stay pointing left'], [1, 'Stay pointing right']].forEach(function (side) {
+        items.push([side[1], function () { o.lock = o.lock === side[0] ? 0 : side[0]; }, o.lock === side[0]]);
+      });
+      if (o.kind.gun) items.push([o.kind.auto ? 'Firing' : 'Fire', function () { trigger(o); }, o.firing]);
+    }
+    if (hit.vehicle) items.push(['Engine running', function () { o.on = !o.on; }, o.on]);
+    if (hit.vehicle && o.kind === 'tank') {
+      items.push(['Fire the cannon', function () { launch(o.x + o.dir * (o.w / 2 + 8), o.y - o.h / 2 + 12, o.dir > 0 ? 0 : Math.PI); }]);
+    }
+    if (hit.bomb && o.fuse === null && !o.armed) items.push([o.k.mine ? 'Arm it' : 'Light the fuse', function () { light(o); }]);
+    if (hit.body) {
+      [[-1, 'Walk left'], [1, 'Walk right']].forEach(function (side) {
+        items.push([side[1], function () { o.walk = o.walk === side[0] ? 0 : side[0]; o.sit = false; }, o.walk === side[0]]);
+      });
+      if (!o.sp.animal) items.push(['Sit down', function () { o.sit = !o.sit; o.walk = 0; }, o.sit]);
+      if (o.helmet || o.vest) items.push(['Take off armour', function () { o.helmet = o.vest = false; }]);
+    }
+    if (!hit.block) {
+      items.push(['Frozen in place', function () {
+        o.frozen = !o.frozen;
+        if (hit.body) o.pin = o.pts.map(function (p) { return { x: p.x, y: p.y }; });
+        if (hit.vehicle) { o.fx = o.x; o.fy = o.y; }
+      }, o.frozen]);
+    }
+    ['rope', 'rod', 'spring'].forEach(function (kind) {
+      items.push(['Tie a ' + kind + ' from here', function () { tying = { kind: kind, a: anchorAt(pos) }; }]);
+    });
+    if (links.some(function (l) { return l.a.o === o || l.b.o === o; })) {
+      items.push(['Cut everything tied to it', function () {
+        links = links.filter(function (l) { return l.a.o !== o && l.b.o !== o; });
+      }]);
+    }
+    items.push(['Delete', function () {
+      var at = list.indexOf(o);
+      if (at >= 0) list.splice(at, 1);
+      if (hit.body) forget(o);
+      if (held && (held.body === o || held.sword === o || held.vehicle === o || held.bomb === o || held.block === o)) held = null;
+    }]);
+    showMenu(e, items);
+  });
+  document.addEventListener('pointerdown', function (e) { if (!menu.contains(e.target)) closeMenu(); });
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') { closeMenu(); tying = null; }
+    if (e.key === 'p' || e.key === 'P') setPaused(!paused);
+  });
 
   // Dragging a new person out of the sidebar
   function moveGhost(e) {
@@ -1913,8 +3359,18 @@
     });
   }
   source(person, function (x, y, vx, vy) { addBody('human', x, y, vx, vy); });
-  ['dog', 'pig', 'cow'].forEach(function (kind) {
+  ['melon', 'pumpkin', 'corn', 'apple', 'robot', 'dog', 'pig', 'cow'].forEach(function (kind) {
     source(document.getElementById(kind), function (x, y, vx, vy) { addBody(kind, x, y, vx, vy); });
+  });
+  // armour isn't an object either: dropping it on a person puts it on them
+  ['helmet', 'vest'].forEach(function (kind) {
+    source(document.getElementById(kind), function (x, y) {
+      var hit = jointAt({ x: x, y: y });
+      if (hit && !hit.body.sp.animal && !hit.body.bare) hit.body[kind] = true;
+    });
+  });
+  Object.keys(BLOCKS).forEach(function (kind) {
+    source(document.getElementById(kind), function (x, y) { addBlock(kind, x, y); });
   });
   Object.keys(VEHICLES).forEach(function (kind) {
     source(document.getElementById(kind), function (x, y, vx, vy) { addVehicle(kind, x, y, vx, vy); });
