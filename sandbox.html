@@ -209,7 +209,7 @@
 
 <div class="game">
   <aside class="sidebar">
-    <button id="naoya" class="person" type="button" style="display: none" aria-label="Naoya, limited event. Drag into the box, or press Enter to drop from the top. Hover over him and press Space to control him.">
+    <button id="naoya" class="person" type="button" style="display: none" aria-label="Naoya, limited event. Drag into the box, or press Enter to drop from the top. Hover over him and press Space to take control, then hold Space for super speed.">
       <svg viewBox="0 0 46 104" fill="none" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
         <path d="M17 62 L16 82 L15 99 M29 62 L30 82 L31 99" stroke="#23283f" stroke-width="9"/>
         <path d="M23 20 V30" stroke="#f1c9a5" stroke-width="6"/>
@@ -834,7 +834,8 @@
   var EVENT_START = Date.UTC(2026, 10, 1);
   var EVENT_END = EVENT_START + 10 * 24 * 60 * 60 * 1000;
   var KILL_GOAL = 10000;
-  var NAOYA_RUN = 600;   // px/s, against the WALK everyone else manages
+  var NAOYA_RUN = 600;   // px/s with his super speed on, while Space is held
+  var NAOYA_JOG = 140;   // px/s without it: twice the WALK everyone else manages
   var NAOYA_JUMP = 1100; // px/s upward
   var NAOYA_LOOK = { skin: '#f1c9a5', hair: '#e8c547', shirt: '#1b1f3a', pants: '#23283f' };
   var KILLS_KEY = 'bettersandbox.eventKills';
@@ -865,7 +866,7 @@
       var left = EVENT_END - Date.now();
       var ends = 'Ends in ' + Math.floor(left / 864e5) + 'd ' + Math.floor(left / 36e5) % 24 + 'h ' + Math.floor(left / 6e4) % 60 + 'm.';
       text = kills >= KILL_GOAL
-        ? 'Naoya unlocked! Drag him in from the top of the sidebar. Hover over him and press Space to control him: A/D or ←/→ to run, W or ↑ to jump (again in mid-air for a double jump), Space to let go. ' + ends
+        ? 'Naoya unlocked! Drag him in from the top of the sidebar. Hover over him and press Space to take control: A/D or ←/→ to run, W or ↑ to jump (again in mid-air for a double jump), hold Space for super speed, Esc to let go. ' + ends
         : 'Limited event: kill ' + KILL_GOAL.toLocaleString() + ' people to unlock Naoya. Killed so far: ' + kills.toLocaleString() + '. ' + ends;
     } else if (kills || bodies.some(function (b) { return b.naoya; })) {
       // the event is over: Naoya and the kill count go with it
@@ -2300,10 +2301,11 @@
     }
   }
 
-  // Naoya runs and jumps where you steer him, or on his own dashes at the nearest living body.
-  // Nothing hurts him, and whoever he touches dies and is knocked flying.
+  // Naoya runs and jumps where you steer him, at super speed while you hold Space, or on his own
+  // jogs after the nearest living body. Nothing hurts him, and whoever he touches dies and is
+  // knocked flying.
   function stepNaoya(b) {
-    var pts = b.pts, me = pts[CH], dir = 0, jump = false, i, n, o;
+    var pts = b.pts, me = pts[CH], dir = 0, jump = false, fast = b === controlled && keys.Space, i, n, o;
     b.immortal = true;
     b.state = 'ok';
     b.blood = 100;
@@ -2332,8 +2334,9 @@
       }
     }
     if (dir) {
-      b.dash = dir;
-      for (i = 0; i < pts.length; i++) { pts[i].x += dir * NAOYA_RUN * STEP; pts[i].px += dir * NAOYA_RUN * STEP; }
+      var run = (fast ? NAOYA_RUN : NAOYA_JOG) * dir * STEP;
+      if (fast) b.dash = dir;
+      for (i = 0; i < pts.length; i++) { pts[i].x += run; pts[i].px += run; }
     }
     if (jump) {
       // leaving the ground at once, so neither standing's bracing nor the floor soaks up the jump
@@ -3208,7 +3211,7 @@
       ctx.globalAlpha = 1;
     }
     var hover = jointAt(mouse);
-    var tags = b === controlled ? ['Naoya (you)'] : hover && hover.body === b ? ['Space to control', 'Naoya'] : ['Naoya'];
+    var tags = b === controlled ? ['Hold Space: super speed', 'Naoya (you)'] : hover && hover.body === b ? ['Space to control', 'Naoya'] : ['Naoya'];
     ctx.font = 'bold 12px system-ui, sans-serif';
     ctx.textAlign = 'center';
     ctx.lineWidth = 3;
@@ -3498,17 +3501,17 @@
     if (e.key === 'Escape') { closeMenu(); tying = null; }
     if (e.key === 'p' || e.key === 'P') setPaused(!paused);
   });
-  // Naoya: Space with the pointer over him takes control, Space again lets go.
-  // Arrows or A/D run, W or Up jumps.
+  // Naoya: Space with the pointer over him takes control, and once he is yours holding Space is
+  // his super speed. Arrows or A/D run, W or Up jumps, Esc lets go.
   document.addEventListener('keydown', function (e) {
     keys[e.code] = true;
+    if (e.code === 'Escape') controlled = null;
     if (e.code === 'Space') {
       var over = jointAt(mouse);
       if (!controlled && !(over && over.body.naoya)) return;
       e.preventDefault();
-      if (e.repeat) return;
-      controlled = controlled ? null : over.body;
-      if (controlled && document.activeElement) document.activeElement.blur();
+      if (!controlled) controlled = over.body;
+      if (document.activeElement) document.activeElement.blur();
     } else if (controlled && /^(Arrow|KeyW$|KeyA$|KeyD$)/.test(e.code)) {
       e.preventDefault();
       if ((e.code === 'ArrowUp' || e.code === 'KeyW') && !e.repeat) jumpQueued = true;
