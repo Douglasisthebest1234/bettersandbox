@@ -829,11 +829,11 @@
   var ghost = null;      // { el, samples } while dragging out of the sidebar
   var last = 0, acc = 0, clock = 0;
 
-  // Limited-time event: kill 10,000 people within 10 days to unlock Naoya, a super-fast person
+  // Limited-time event: kill 1,000 people within 10 days to unlock Naoya, a super-fast person
   // who kills anyone he touches. Everything about it switches itself off once EVENT_END passes.
   var EVENT_START = Date.UTC(2026, 10, 1);
   var EVENT_END = EVENT_START + 10 * 24 * 60 * 60 * 1000;
-  var KILL_GOAL = 10000;
+  var KILL_GOAL = 1000;
   var NAOYA_RUN = 600;   // px/s with his super speed on, while Space is held
   var NAOYA_JOG = 140;   // px/s without it: twice the WALK everyone else manages
   var NAOYA_JUMP = 1100; // px/s upward
