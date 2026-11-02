@@ -144,6 +144,19 @@
     cursor: pointer;
   }
   .tools button[aria-pressed="true"] { background: var(--side); color: var(--on-side); }
+  /* The limited-time event banner along the bottom of the box */
+  .event {
+    position: absolute;
+    left: 8px; right: 8px; bottom: 8px;
+    z-index: 2;
+    padding: 6px 10px;
+    border-radius: 8px;
+    border: 2px solid #e8c547;
+    background: var(--box);
+    color: CanvasText;
+    font: 13px system-ui, sans-serif;
+    pointer-events: none;
+  }
   .menu {
     position: fixed;
     z-index: 20;
@@ -196,7 +209,19 @@
 
 <div class="game">
   <aside class="sidebar">
-    <button id="person" class="person" type="button" aria-label="Person. Drag into the box, or press Enter to drop from the top.">
+    <button id="naoya" class="person" type="button" style="display: none" aria-label="Naoya, limited event. Drag into the box, or press Enter to drop from the top. Hover over him and press Space to control him.">
+      <svg viewBox="0 0 46 104" fill="none" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M17 62 L16 82 L15 99 M29 62 L30 82 L31 99" stroke="#23283f" stroke-width="9"/>
+        <path d="M23 20 V30" stroke="#f1c9a5" stroke-width="6"/>
+        <path d="M13 30 H33 L30 60 H16 Z" fill="#1b1f3a" stroke="#1b1f3a" stroke-width="8"/>
+        <path d="M10 30 L5 46 L4 62 M36 30 L41 46 L42 62" stroke="#f1c9a5" stroke-width="7"/>
+        <circle cx="23" cy="12" r="10" fill="#f1c9a5"/>
+        <path d="M13 12 A10 10 0 0 1 33 12 Z" fill="#e8c547"/>
+        <circle cx="19.5" cy="15.5" r="1.6" fill="#1d1a19"/>
+        <circle cx="26.5" cy="15.5" r="1.6" fill="#1d1a19"/>
+      </svg>
+    </button>
+    <button id="person"class="person" type="button" aria-label="Person. Drag into the box, or press Enter to drop from the top.">
       <svg viewBox="0 0 46 104" fill="none" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
         <path d="M17 62 L16 82 L15 99 M29 62 L30 82 L31 99" stroke="#5a6b94" stroke-width="9"/>
         <path d="M23 20 V30" stroke="#e0a878" stroke-width="6"/>
@@ -619,6 +644,7 @@
   </aside>
   <div id="box" class="box">
     <canvas id="canvas"></canvas>
+    <div id="event" class="event" style="display: none"></div>
     <div class="tools">
       <button id="pause" type="button" aria-pressed="false">Pause</button>
       <button id="speed" type="button">Speed 1&times;</button>
@@ -803,6 +829,58 @@
   var ghost = null;      // { el, samples } while dragging out of the sidebar
   var last = 0, acc = 0, clock = 0;
 
+  // Limited-time event: kill 10,000 people within 10 days to unlock Naoya, a super-fast person
+  // who kills anyone he touches. Everything about it switches itself off once EVENT_END passes.
+  var EVENT_START = Date.UTC(2026, 10, 1);
+  var EVENT_END = EVENT_START + 10 * 24 * 60 * 60 * 1000;
+  var KILL_GOAL = 10000;
+  var NAOYA_RUN = 600;   // px/s, against the WALK everyone else manages
+  var NAOYA_JUMP = 1100; // px/s upward
+  var NAOYA_LOOK = { skin: '#f1c9a5', hair: '#e8c547', shirt: '#1b1f3a', pants: '#23283f' };
+  var KILLS_KEY = 'bettersandbox.eventKills';
+  var keys = {}, controlled = null, jumpQueued = false, eventText = '';
+  var naoyaBtn = document.getElementById('naoya'), eventBox = document.getElementById('event');
+  function eventOn() { var t = Date.now(); return t >= EVENT_START && t < EVENT_END; }
+  // the kill count is kept in the browser; storage can be blocked, so every access is guarded
+  function load(k) { try { return localStorage.getItem(k); } catch (e) { return null; } }
+  function save(k, v) { try { if (v === null) localStorage.removeItem(k); else localStorage.setItem(k, v); } catch (e) {} }
+  var kills = eventOn() ? Number(load(KILLS_KEY)) || 0 : 0;
+  if (!eventOn()) save(KILLS_KEY, null);
+  // Each person counts once, the first time they die. Animals and Naoya himself don't count.
+  function tally(b) {
+    if (b.counted || b.sp.animal || b.naoya || !eventOn()) return;
+    b.counted = true;
+    kills++;
+    save(KILLS_KEY, kills);
+  }
+  // There is only ever one Naoya in the box
+  function removeNaoya() {
+    for (var i = bodies.length - 1; i >= 0; i--) {
+      if (bodies[i].naoya) { forget(bodies[i]); bodies.splice(i, 1); }
+    }
+  }
+  function updateEvent() {
+    var text = '';
+    if (eventOn()) {
+      var left = EVENT_END - Date.now();
+      var ends = 'Ends in ' + Math.floor(left / 864e5) + 'd ' + Math.floor(left / 36e5) % 24 + 'h ' + Math.floor(left / 6e4) % 60 + 'm.';
+      text = kills >= KILL_GOAL
+        ? 'Naoya unlocked! Drag him in from the top of the sidebar. Hover over him and press Space to control him: A/D or ←/→ to run, W or ↑ to jump (again in mid-air for a double jump), Space to let go. ' + ends
+        : 'Limited event: kill ' + KILL_GOAL.toLocaleString() + ' people to unlock Naoya. Killed so far: ' + kills.toLocaleString() + '. ' + ends;
+    } else if (kills || bodies.some(function (b) { return b.naoya; })) {
+      // the event is over: Naoya and the kill count go with it
+      removeNaoya();
+      controlled = null;
+      kills = 0;
+      save(KILLS_KEY, null);
+    }
+    naoyaBtn.style.display = eventOn() && kills >= KILL_GOAL ? '' : 'none';
+    if (text !== eventText) {
+      eventText = eventBox.textContent = text;
+      eventBox.style.display = text ? '' : 'none';
+    }
+  }
+
   function pick(list) { return list[Math.floor(Math.random() * list.length)]; }
   function resize() {
     var dpr = Math.min(2, window.devicePixelRatio || 1);
@@ -850,7 +928,10 @@
       seen: {}          // when each part can next be cut, so one swing rolls the dice once
     });
     if (bodies.length > MAX_PEOPLE) {
-      forget(bodies.shift());
+      // the oldest goes to make room, but never Naoya
+      var old = 0;
+      while (bodies[old].naoya) old++;
+      forget(bodies.splice(old, 1)[0]);
     }
   }
 
@@ -1187,6 +1268,7 @@
       }
       if (near >= R) continue;
       if (k.nuke && near < VAPORIZE && !b.immortal) {
+        if (b.state !== 'dead') tally(b);
         forget(b);
         spray(b.pts[CH].x, b.pts[CH].y, 30, 2);
         bodies.splice(i, 1);
@@ -1655,6 +1737,7 @@
 
   function kill(b) {
     if (b.immortal) return;
+    if (b.state !== 'dead') tally(b);
     if (!b.skin0) b.skin0 = b.skin;
     b.state = 'dead';
     b.skin = '#a9aaa3';
@@ -2217,6 +2300,75 @@
     }
   }
 
+  // Naoya runs and jumps where you steer him, or on his own dashes at the nearest living body.
+  // Nothing hurts him, and whoever he touches dies and is knocked flying.
+  function stepNaoya(b) {
+    var pts = b.pts, me = pts[CH], dir = 0, jump = false, i, n, o;
+    b.immortal = true;
+    b.state = 'ok';
+    b.blood = 100;
+    b.bleed = {};
+    b.loose = b.virus = b.poison = b.sit = false;
+    b.fire = b.burn = b.shock = b.walk = 0;
+    b.dash = 0;
+    if (b.frozen || (held && held.body === b)) return;
+    if (b.ground > 0) b.jumps = 0;
+    if (b === controlled) {
+      dir = (keys.ArrowRight || keys.KeyD ? 1 : 0) - (keys.ArrowLeft || keys.KeyA ? 1 : 0);
+      if (jumpQueued && b.ground > 0) jump = true;
+      else if (jumpQueued && !b.jumps) { jump = true; b.jumps = 1; }   // one more jump in mid-air
+    } else {
+      var best = null, bestD = Infinity;
+      for (i = 0; i < bodies.length; i++) {
+        o = bodies[i];
+        if (o.naoya || o.state === 'dead' || o.immortal) continue;
+        var d = Math.hypot(o.pts[CH].x - me.x, o.pts[CH].y - me.y);
+        if (d < bestD) { bestD = d; best = o; }
+      }
+      if (best) {
+        var dx = best.pts[CH].x - me.x;
+        if (Math.abs(dx) > 8) dir = dx > 0 ? 1 : -1;
+        jump = b.ground > 0 && best.pts[CH].y < me.y - 60;
+      }
+    }
+    if (dir) {
+      b.dash = dir;
+      for (i = 0; i < pts.length; i++) { pts[i].x += dir * NAOYA_RUN * STEP; pts[i].px += dir * NAOYA_RUN * STEP; }
+    }
+    if (jump) {
+      // leaving the ground at once, so neither standing's bracing nor the floor soaks up the jump
+      b.ground = 0;
+      b.standing = false;
+      for (i = 0; i < pts.length; i++) {
+        pts[i].y -= NAOYA_JUMP * STEP;
+        pts[i].py = pts[i].y + NAOYA_JUMP * STEP;
+      }
+    }
+    bounds(b);
+    for (i = 0; i < bodies.length; i++) {
+      o = bodies[i];
+      if (o.naoya || o.state === 'dead' || o.immortal) continue;
+      bounds(o);
+      if (o.x1 < b.x0 || b.x1 < o.x0 || o.y1 < b.y0 || b.y1 < o.y0 || !touching(b, o)) continue;
+      kill(o);
+      var away = o.pts[CH].x > me.x ? 1 : -1;
+      for (n = 0; n < o.pts.length; n++) {
+        o.pts[n].px = o.pts[n].x - away * 900 * STEP;
+        o.pts[n].py = o.pts[n].y + 450 * STEP;
+      }
+      spray(o.pts[CH].x, o.pts[CH].y, 10, 1, o.sp.metal ? '#9aa3b2' : BLOOD);
+    }
+  }
+  function touching(a, o) {
+    for (var m = 0; m < a.pts.length; m++) {
+      for (var n = 0; n < o.pts.length; n++) {
+        var p = a.pts[m], q = o.pts[n];
+        if (Math.hypot(q.x - p.x, q.y - p.y) < p.r + q.r + 2) return true;
+      }
+    }
+    return false;
+  }
+
   function integrate(b) {
     var pts = b.pts, sx = 0, sy = 0, minX = 1e9, minY = 1e9, maxX = -1e9, maxY = -1e9;
     var cap = MAX_THROW * STEP;
@@ -2511,7 +2663,13 @@
     if (held && held.block) { held.block.x = held.tx; held.block.y = held.ty; }
     // a link goes when either thing it joins is gone
     links = links.filter(function (l) { return there(l.a) && there(l.b); });
-    for (i = 0; i < bodies.length; i++) { integrate(bodies[i]); stand(bodies[i]); }
+    if (controlled && bodies.indexOf(controlled) < 0) controlled = null;
+    for (i = 0; i < bodies.length; i++) {
+      integrate(bodies[i]);
+      stand(bodies[i]);
+      if (bodies[i].naoya) stepNaoya(bodies[i]);
+    }
+    jumpQueued = false;
     for (n = 0; n < STIFFNESS; n++) {
       for (i = 0; i < bodies.length; i++) bones(bodies[i]);
       stepLinks();
@@ -2529,6 +2687,7 @@
     for (i = bodies.length - 1; i >= 0; i--) {
       var sm = bodies[i];
       if (!sm.smashed) continue;
+      if (sm.state !== 'dead') tally(sm);
       var bits = sm.bare ? '#cfc8b4' : sm.sp.metal ? '#9aa3b2' : BLOOD;
       for (n = 0; n < sm.pts.length; n++) spray(sm.pts[n].x, sm.pts[n].y, 7, 1.6, bits);
       forget(sm);
@@ -2872,7 +3031,7 @@
       }
       ctx.stroke();
     }
-    if (b.immortal) {
+    if (b.immortal && !b.naoya) {
       ctx.strokeStyle = '#ffd24a';
       ctx.beginPath();
       ctx.arc(head.x, head.y, r + 4, 0, Math.PI * 2);
@@ -3033,6 +3192,35 @@
     }
   }
 
+  // Naoya's name over his head, and speed lines trailing behind him while he dashes
+  function drawNaoya(b) {
+    var head = b.pts[HEAD], ch = b.pts[CH], n;
+    if (b.dash) {
+      ctx.strokeStyle = '#e8c547';
+      ctx.lineWidth = 2;
+      ctx.globalAlpha = 0.6;
+      ctx.beginPath();
+      for (n = -1; n <= 1; n++) {
+        ctx.moveTo(ch.x - b.dash * 20, ch.y + n * 16);
+        ctx.lineTo(ch.x - b.dash * 50, ch.y + n * 16);
+      }
+      ctx.stroke();
+      ctx.globalAlpha = 1;
+    }
+    var hover = jointAt(mouse);
+    var tags = b === controlled ? ['Naoya (you)'] : hover && hover.body === b ? ['Space to control', 'Naoya'] : ['Naoya'];
+    ctx.font = 'bold 12px system-ui, sans-serif';
+    ctx.textAlign = 'center';
+    ctx.lineWidth = 3;
+    ctx.strokeStyle = '#1d1a19';
+    ctx.fillStyle = '#e8c547';
+    for (n = 0; n < tags.length; n++) {
+      var ty = head.y - 18 - (tags.length - 1 - n) * 15;
+      ctx.strokeText(tags[n], head.x, ty);
+      ctx.fillText(tags[n], head.x, ty);
+    }
+  }
+
   function draw() {
     ctx.clearRect(0, 0, W, H);
     ctx.lineCap = ctx.lineJoin = 'round';
@@ -3047,6 +3235,7 @@
     for (i = 0; i < vehicles.length; i++) drawVehicle(vehicles[i]);
     ctx.lineCap = ctx.lineJoin = 'round';
     for (i = 0; i < bodies.length; i++) drawPerson(bodies[i]);
+    for (i = 0; i < bodies.length; i++) if (bodies[i].naoya) drawNaoya(bodies[i]);
     drawLinks();
     drawBlood();
     ctx.lineCap = ctx.lineJoin = 'round';
@@ -3080,6 +3269,7 @@
     var n = 0;
     while (acc >= STEP && n < 6) { step(); acc -= STEP; n++; }
     if (acc >= STEP) acc = 0;
+    updateEvent();
     draw();
     requestAnimationFrame(tick);
   }
@@ -3308,6 +3498,24 @@
     if (e.key === 'Escape') { closeMenu(); tying = null; }
     if (e.key === 'p' || e.key === 'P') setPaused(!paused);
   });
+  // Naoya: Space with the pointer over him takes control, Space again lets go.
+  // Arrows or A/D run, W or Up jumps.
+  document.addEventListener('keydown', function (e) {
+    keys[e.code] = true;
+    if (e.code === 'Space') {
+      var over = jointAt(mouse);
+      if (!controlled && !(over && over.body.naoya)) return;
+      e.preventDefault();
+      if (e.repeat) return;
+      controlled = controlled ? null : over.body;
+      if (controlled && document.activeElement) document.activeElement.blur();
+    } else if (controlled && /^(Arrow|KeyW$|KeyA$|KeyD$)/.test(e.code)) {
+      e.preventDefault();
+      if ((e.code === 'ArrowUp' || e.code === 'KeyW') && !e.repeat) jumpQueued = true;
+    }
+  });
+  document.addEventListener('keyup', function (e) { keys[e.code] = false; });
+  window.addEventListener('blur', function () { keys = {}; });
 
   // Dragging a new person out of the sidebar
   function moveGhost(e) {
@@ -3359,6 +3567,17 @@
     });
   }
   source(person, function (x, y, vx, vy) { addBody('human', x, y, vx, vy); });
+  source(naoyaBtn, function (x, y, vx, vy) {
+    if (!eventOn() || kills < KILL_GOAL) return;
+    removeNaoya();
+    addBody('human', x, y, vx, vy);
+    var b = bodies[bodies.length - 1];
+    b.naoya = b.immortal = true;
+    b.skin = NAOYA_LOOK.skin;
+    b.hair = NAOYA_LOOK.hair;
+    b.shirt = NAOYA_LOOK.shirt;
+    b.pants = NAOYA_LOOK.pants;
+  });
   ['melon', 'pumpkin', 'corn', 'apple', 'robot', 'dog', 'pig', 'cow'].forEach(function (kind) {
     source(document.getElementById(kind), function (x, y, vx, vy) { addBody(kind, x, y, vx, vy); });
   });
