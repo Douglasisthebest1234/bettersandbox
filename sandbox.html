@@ -864,7 +864,7 @@
     var text = '';
     if (eventOn()) {
       var left = EVENT_END - Date.now();
-      var ends = 'Ends in ' + Math.floor(left / 864e5) + 'd ' + Math.floor(left / 36e5) % 24 + 'h ' + Math.floor(left / 6e4) % 60 + 'm.';
+      var ends = 'Ends in ' + Math.floor(left / 864e5) + 'd ' + Math.floor(left / 36e5) % 24 + 'h ' + Math.floor(left / 6e4) % 60 + 'm ' + Math.floor(left / 1e3) % 60 + 's.';
       text = kills >= KILL_GOAL
         ? 'Naoya unlocked! Drag him in from the top of the sidebar. Hover over him and press Space to take control: A/D or ←/→ to run, W or ↑ to jump (again in mid-air for a double jump), hold Space for super speed, Esc to let go. ' + ends
         : 'Limited event: kill ' + KILL_GOAL.toLocaleString() + ' people to unlock Naoya. Killed so far: ' + kills.toLocaleString() + '. ' + ends;
